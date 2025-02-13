@@ -1,7 +1,15 @@
 package main
 
-import "Blog-Server/core"
+import (
+	"Blog-Server/core"
+	"Blog-Server/flags"
+	"Blog-Server/global"
+)
 
 func main() {
-	core.ReadConf()
+	flags.Parse()
+	global.Config = core.ReadConf()
+	core.InitLogrus()
+	global.DB = core.InitDB()
+
 }
