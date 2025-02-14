@@ -39,6 +39,6 @@ func InitDB() *gorm.DB {
 			logrus.Fatalf("读写配置错误 %s ", err)
 		}
 	}
-	//pssql
+	//pgsql
 	return db
 }
