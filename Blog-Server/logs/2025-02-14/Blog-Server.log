@@ -4,3 +4,7 @@
 [2025-02-14 20:33:28] [36m[info][0m flag_db.go:18 Blog-Server/flags.FlagDB 数据库迁移成功！
 [2025-02-14 20:51:45] [36m[info][0m init_db.go:29 Blog-Server/core.InitDB 数据库连接成功!
 [2025-02-14 20:51:45] [36m[info][0m flag_db.go:18 Blog-Server/flags.FlagDB 数据库迁移成功！
+[2025-02-14 21:09:57] [36m[info][0m init_db.go:29 Blog-Server/core.InitDB 数据库连接成功!
+[2025-02-14 21:09:57] [36m[info][0m flag_db.go:19 Blog-Server/flags.FlagDB 数据库迁移成功！
+[2025-02-14 21:11:23] [36m[info][0m init_db.go:29 Blog-Server/core.InitDB 数据库连接成功!
+[2025-02-14 21:11:23] [36m[info][0m flag_db.go:19 Blog-Server/flags.FlagDB 数据库迁移成功！
