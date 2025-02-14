@@ -22,6 +22,7 @@ func InitDB() *gorm.DB {
 		logrus.Fatalf("数据库连接失败 %s", err)
 	}
 	sqlDB, err := db.DB()
+
 	sqlDB.SetMaxIdleConns(10)
 	sqlDB.SetMaxOpenConns(100)
 	sqlDB.SetConnMaxLifetime(time.Hour)
