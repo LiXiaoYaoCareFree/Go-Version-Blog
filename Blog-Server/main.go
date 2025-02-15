@@ -4,6 +4,7 @@ import (
 	"Blog-Server/core"
 	"Blog-Server/flags"
 	"Blog-Server/global"
+	"Blog-Server/router"
 )
 
 func main() {
@@ -15,5 +16,5 @@ func main() {
 	flags.Run()
 
 	//启动web程序
-
+	router.Run()
 }
