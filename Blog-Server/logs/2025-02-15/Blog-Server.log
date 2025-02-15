@@ -8,3 +8,14 @@
 [2025-02-15 09:50:36] [36m[info][0m init_db.go:29 Blog-Server/core.InitDB 数据库连接成功!
 [2025-02-15 09:50:36] [36m[info][0m flag_db.go:30 Blog-Server/flags.FlagDB 数据库迁移成功！
 [2025-02-15 10:58:06] [36m[info][0m init_db.go:29 Blog-Server/core.InitDB 数据库连接成功!
+[2025-02-15 11:08:21] [36m[info][0m init_db.go:29 Blog-Server/core.InitDB 数据库连接成功!
+[2025-02-15 12:52:58] [36m[info][0m init_db.go:29 Blog-Server/core.InitDB 数据库连接成功!
+[2025-02-15 14:44:15] [36m[info][0m init_db.go:29 Blog-Server/core.InitDB 数据库连接成功!
+[2025-02-15 14:44:23] [31m[error][0m enter.go:39 Blog-Server/api/site_api.SiteApi.SiteUpdateView EOF
+[2025-02-15 14:44:23] [31m[error][0m action_log.go:42 Blog-Server/service/log_service.(*ActionLog).Save 日志创建失败 %!s(<nil>)
+[2025-02-15 14:50:53] [36m[info][0m init_db.go:29 Blog-Server/core.InitDB 数据库连接成功!
+[2025-02-15 14:50:59] [31m[error][0m action_log.go:42 Blog-Server/service/log_service.(*ActionLog).Save 日志创建失败 %!s(<nil>)
+[2025-02-15 14:58:14] [36m[info][0m init_db.go:29 Blog-Server/core.InitDB 数据库连接成功!
+[2025-02-15 14:58:20] [31m[error][0m action_log.go:42 Blog-Server/service/log_service.(*ActionLog).Save 日志创建失败 %!s(<nil>)
+[2025-02-15 15:03:01] [36m[info][0m init_db.go:29 Blog-Server/core.InitDB 数据库连接成功!
+[2025-02-15 15:17:22] [36m[info][0m init_db.go:29 Blog-Server/core.InitDB 数据库连接成功!
