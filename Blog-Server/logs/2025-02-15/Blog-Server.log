@@ -1,0 +1,3 @@
+[2025-02-15 08:52:33] [31m[fatal][0m init_db.go:22 Blog-Server/core.InitDB 数据库连接失败 dial tcp 127.0.0.1:3306: connectex: No connection could be made because the target machine actively refused it.
+[2025-02-15 08:52:58] [36m[info][0m init_db.go:29 Blog-Server/core.InitDB 数据库连接成功!
+[2025-02-15 08:52:58] [36m[info][0m flag_db.go:27 Blog-Server/flags.FlagDB 数据库迁移成功！
