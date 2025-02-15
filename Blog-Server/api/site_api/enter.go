@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
+	"time"
 )
 
 type SiteApi struct {
@@ -26,15 +27,20 @@ type SiteUpdateRequest struct {
 func (SiteApi) SiteUpdateView(c *gin.Context) {
 	log := log_service.GetLog(c)
 
-	//log.ShowRequest()
+	log.ShowRequest()
 	log.ShowResponse()
+	log.SetTitle("更新站点")
+	log.SetItemInfo("请求时间", time.Now())
 
 	var cr SiteUpdateRequest
 	err := c.ShouldBindJSON(&cr)
 	if err != nil {
 		logrus.Errorf(err.Error())
 	}
-
+	log.SetItemInfo("结构体", cr)
+	log.SetItemInfo("切片", []string{"a", "b"})
+	log.SetItemInfo("字符串", "你好")
+	log.SetItemInfo("数字", 123)
 	c.JSON(200, gin.H{"code": 0, "msg": "站点信息"})
 	return
 }
