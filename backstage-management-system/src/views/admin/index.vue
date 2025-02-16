@@ -3,6 +3,7 @@
 
 import CodeForge_theme from "@/components/common/CodeForge_theme.vue";
 import CodeForge_screen from "@/components/common/CodeForge_screen.vue";
+import CodeForge_menu from "@/components/admin/CodeForge_menu.vue";
 </script>
 
 <template>
@@ -11,9 +12,7 @@ import CodeForge_screen from "@/components/common/CodeForge_screen.vue";
     <div class="CodeForge_logo">
 
     </div>
-    <div class="CodeForge_menu">
-
-    </div>
+    <CodeForge_menu></CodeForge_menu>
   </div>
   <div class="CodeForge_main">
     <div class="CodeForge_head">
@@ -43,7 +42,7 @@ import CodeForge_screen from "@/components/common/CodeForge_screen.vue";
 
 .CodeForge_admin {
   display: flex;
-  background-color: @color-fill-1;
+  background-color: var(--color-bg-1);
   color: @color-text-1;
 
   .CodeForge_aside {
@@ -87,6 +86,7 @@ import CodeForge_screen from "@/components/common/CodeForge_screen.vue";
       height: calc(100% - 90px);
       overflow-y: auto;
       overflow-x: hidden;
+      background-color: @color-fill-2;
     }
   }
 }
