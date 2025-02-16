@@ -38,6 +38,7 @@
 
 <style lang="less">
 
+
 .CodeForge_admin {
   display: flex;
 
@@ -47,7 +48,8 @@
     height: 100vh;
     overflow-y: auto;
     overflow-x: hidden;
-    border-right: 1px solid var(--color-neutral-2);
+    border-right: 1px solid @color-border-1;
+    background-color: @primary-6;
 
 
     .CodeForge_logo {
