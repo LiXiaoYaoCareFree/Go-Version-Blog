@@ -1,5 +1,7 @@
 <script setup lang="ts">
 
+
+import CodeForge_theme from "@/components/common/CodeForge_theme.vue";
 </script>
 
 <template>
@@ -17,8 +19,7 @@
       <div class="CodeForge_breadcrumbs"></div>
       <div class="CodeForge_actions">
           <icon-home />
-          <icon-sun-fill />
-          <icon-moon-fill />
+          <CodeForge_theme></CodeForge_theme>
           <icon-fullscreen-exit />
           <div class="CodeForge_user_info_action">
 
@@ -41,7 +42,8 @@
 
 .CodeForge_admin {
   display: flex;
-
+  background-color: @color-fill-1;
+  color: @color-text-1;
 
   .CodeForge_aside {
     width: 240px;
@@ -49,7 +51,7 @@
     overflow-y: auto;
     overflow-x: hidden;
     border-right: 1px solid @color-border-1;
-    background-color: @primary-6;
+    background-color:   @color-fill-1;
 
 
     .CodeForge_logo {
