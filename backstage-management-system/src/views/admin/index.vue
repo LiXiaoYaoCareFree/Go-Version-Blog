@@ -38,4 +38,54 @@
 
 <style lang="less">
 
+.CodeForge_admin {
+  display: flex;
+
+
+  .CodeForge_aside {
+    width: 240px;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-right: 1px solid var(--color-neutral-2);
+
+
+    .CodeForge_logo {
+      width: 100%;
+      height: 90px;
+      border-bottom: 1px solid var(--color-neutral-2);
+    }
+  }
+
+  .CodeForge_main {
+    width: calc(100% - 240px);
+
+
+    .CodeForge_head {
+      width: 100%;
+      height: 60px;
+      border-bottom: 1px solid var(--color-neutral-2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .CodeForge_tabs {
+      width: 100%;
+      height: 30px;
+      border-bottom: 1px solid var(--color-neutral-2);
+    }
+
+    .CodeForge_container {
+      width: 100%;
+      height: calc(100% - 90px);
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+  }
+}
+
+
+
 </style>
