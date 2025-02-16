@@ -32,7 +32,7 @@ const menuList : MenuType[] = [
 </script>
 
 <template>
-<div class="CodeForge_menu">
+<div class="CodeForge_menu scrollbar">
   <a-menu
       show-collapse-button>
     <template v-for="menu in menuList">
@@ -59,5 +59,9 @@ const menuList : MenuType[] = [
 </template>
 
 <style scoped>
-
+.CodeForge_menu {
+  height: calc(100vh - 90px);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 </style>

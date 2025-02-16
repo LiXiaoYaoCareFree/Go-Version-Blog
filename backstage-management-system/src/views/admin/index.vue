@@ -48,7 +48,7 @@ import CodeForge_menu from "@/components/admin/CodeForge_menu.vue";
   .CodeForge_aside {
     width: 240px;
     height: 100vh;
-    overflow-y: auto;
+    overflow-y: hidden;
     overflow-x: hidden;
     border-right: 1px solid @color-border-1;
     background-color:   @color-fill-1;
