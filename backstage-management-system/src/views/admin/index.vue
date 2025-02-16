@@ -2,6 +2,7 @@
 
 
 import CodeForge_theme from "@/components/common/CodeForge_theme.vue";
+import CodeForge_screen from "@/components/common/CodeForge_screen.vue";
 </script>
 
 <template>
@@ -20,7 +21,7 @@ import CodeForge_theme from "@/components/common/CodeForge_theme.vue";
       <div class="CodeForge_actions">
           <icon-home />
           <CodeForge_theme></CodeForge_theme>
-          <icon-fullscreen-exit />
+          <CodeForge_screen></CodeForge_screen>
           <div class="CodeForge_user_info_action">
 
           </div>
