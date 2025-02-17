@@ -5,3 +5,11 @@ declare module '*.vue' {
 
     export default component;
 }
+
+
+import "vue-router"
+declare module 'vue-router' {
+    interface RouteMeta {
+        title: string;
+    }
+}
