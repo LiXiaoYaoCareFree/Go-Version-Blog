@@ -21,12 +21,12 @@ const menuList: MenuType[] = [
   {title: "首页", name: "home", icon: IconHome},
   {
     title: "个人中心", name: "userCenter", icon: IconUser, children: [
-      {title: "个人信息", name: "userInfo", icon: "iconfont icon-yonghuxinxi-"}
+      {title: "个人信息", name: "userInfo", icon: "iconfont icon-lunkuohua_yonghuxinxi"}
     ]
   },
   {
     title: "用户管理", name: "userManage", icon: "iconfont icon-yonghuguanli", children: [
-      {title: "用户列表", name: "userList", icon: "iconfont icon-yonghuguanli_huaban"}
+      {title: "用户列表", name: "userList", icon: "iconfont icon-pingtaiguanliyonghuguanli"}
     ]
   },
   {
