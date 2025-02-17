@@ -6,6 +6,7 @@ import {ref} from "vue";
 import {collapsed} from "@/components/admin/CodeForge_menu";
 import router from "@/router";
 import {useRoute} from "vue-router"
+import {watch} from "vue";
 
 interface MenuType {
   title: string
@@ -25,17 +26,12 @@ const menuList: MenuType[] = [
   },
   {
     title: "用户管理", name: "userManage", icon: "iconfont icon-yonghuguanli", children: [
-      {title: "用户列表", name: "userManage", icon: "iconfont icon-yonghuguanli_huaban"}
-    ]
-  },
-  {
-    title: "组件管理", name: "componentManage", icon: "iconfont icon-xitongpeizhi", children: [
-      {title: "组件列表", name: "componentList", icon: IconSettings}
+      {title: "用户列表", name: "userList", icon: "iconfont icon-yonghuguanli_huaban"}
     ]
   },
   {
     title: "系统设置", name: "settingsManage", icon: "iconfont icon-xitongpeizhi", children: [
-      {title: "系统信息", name: "settingsManage", icon: IconSettings}
+      {title: "系统信息", name: "settings", icon: IconSettings}
     ]
   },
 ]
@@ -46,6 +42,23 @@ function menuItemClick(key: string) {
   })
 }
 
+const openKeys = ref<string[]>([])
+const selectedKeys = ref<string[]>([])
+
+function initRoute() {
+  if (route.matched.length === 3) {
+    openKeys.value = [route.matched[1].name as string]
+  }
+
+  selectedKeys.value = [route.name as string]
+}
+
+
+watch(() => route.name, () => {
+  initRoute()
+}, {immediate: true})
+
+
 </script>
 
 <template>
@@ -55,6 +68,8 @@ function menuItemClick(key: string) {
           @menu-item-click="menuItemClick"
           v-model:collapsed="collapsed"
           :default-selected="[route.name]"
+          v-model:open-keys="openKeys"
+          v-model:selected-keys="selectedKeys"
           show-collapse-button>
         <template v-for="menu in menuList">
           <a-menu-item :key="menu.name" v-if="!menu.children">
