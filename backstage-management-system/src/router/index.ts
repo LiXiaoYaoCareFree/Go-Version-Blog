@@ -46,7 +46,7 @@ const router = createRouter({
                 name: "userInfo",
                 path: "user_info",
               meta: {
-                title: "用户信息"
+                title: "个人信息"
               },
                 component: () => import("@/views/admin/user_center/index.vue"),
             }
@@ -65,7 +65,7 @@ const router = createRouter({
               name: "userList",
               path: "user_list",
               meta: {
-                title: "用户列表"
+                title: "用户信息"
               },
               component: () => import("@/views/admin/user_manage/index.vue"),
             }

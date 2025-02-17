@@ -1,11 +1,17 @@
 <script setup lang="ts">
-
-
 import CodeForge_theme from "@/components/common/CodeForge_theme.vue";
 import CodeForge_screen from "@/components/common/CodeForge_screen.vue";
 import CodeForge_menu from "@/components/admin/CodeForge_menu.vue";
 import {collapsed} from "@/components/admin/CodeForge_menu";
 import CodeForge_breadcrumb from "@/components/admin/CodeForge_breadcrumb.vue";
+import CodeForge_user_dropdown from "@/components/common/CodeForge_user_dropdown.vue";
+import router from "@/router"
+
+function goHome() {
+  router.push({name: "web"})
+}
+
+
 </script>
 
 <template>
@@ -21,12 +27,12 @@ import CodeForge_breadcrumb from "@/components/admin/CodeForge_breadcrumb.vue";
 
       <CodeForge_breadcrumb></CodeForge_breadcrumb>
       <div class="CodeForge_actions">
-          <icon-home />
+          <span title="去首页" @click="goHome"><icon-home/></span>
           <CodeForge_theme></CodeForge_theme>
           <CodeForge_screen></CodeForge_screen>
-          <div class="CodeForge_user_info_action">
+        <CodeForge_user_dropdown>
 
-          </div>
+        </CodeForge_user_dropdown>
       </div>
     </div>
     <div class="CodeForge_tabs">
@@ -84,6 +90,20 @@ import CodeForge_breadcrumb from "@/components/admin/CodeForge_breadcrumb.vue";
       justify-content: space-between;
       align-items: center;
       padding: 0 20px;
+
+
+      .CodeForge_actions{
+        display: flex;
+        align-items: center;
+        svg{
+          font-size: 18px;
+          cursor: pointer;
+          margin-right: 10px;
+        }
+        .CodeForge_user_dropdown_com {
+          padding-left: 10px;
+        }
+      }
     }
 
     .CodeForge_tabs {

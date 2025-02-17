@@ -26,7 +26,7 @@ const menuList: MenuType[] = [
   },
   {
     title: "用户管理", name: "userManage", icon: "iconfont icon-yonghuguanli", children: [
-      {title: "用户列表", name: "userList", icon: "iconfont icon-pingtaiguanliyonghuguanli"}
+      {title: "用户信息", name: "userList", icon: "iconfont icon-pingtaiguanliyonghuguanli"}
     ]
   },
   {
