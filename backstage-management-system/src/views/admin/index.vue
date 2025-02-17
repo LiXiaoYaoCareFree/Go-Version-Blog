@@ -6,6 +6,8 @@ import {collapsed} from "@/components/admin/CodeForge_menu";
 import CodeForge_breadcrumb from "@/components/admin/CodeForge_breadcrumb.vue";
 import CodeForge_user_dropdown from "@/components/common/CodeForge_user_dropdown.vue";
 import router from "@/router"
+import CodeForge_tabs from "@/components/admin/CodeForge_tabs.vue";
+
 
 function goHome() {
   router.push({name: "web"})
@@ -35,10 +37,7 @@ function goHome() {
         </CodeForge_user_dropdown>
       </div>
     </div>
-    <div class="CodeForge_tabs">
-
-
-    </div>
+    <CodeForge_tabs></CodeForge_tabs>
     <div class="CodeForge_container">
       <router-view></router-view>
     </div>
