@@ -5,6 +5,7 @@ import CodeForge_theme from "@/components/common/CodeForge_theme.vue";
 import CodeForge_screen from "@/components/common/CodeForge_screen.vue";
 import CodeForge_menu from "@/components/admin/CodeForge_menu.vue";
 import {collapsed} from "@/components/admin/CodeForge_menu";
+import CodeForge_breadcrumb from "@/components/admin/CodeForge_breadcrumb.vue";
 </script>
 
 <template>
@@ -17,7 +18,8 @@ import {collapsed} from "@/components/admin/CodeForge_menu";
   </div>
   <div class="CodeForge_main">
     <div class="CodeForge_head">
-      <div class="CodeForge_breadcrumbs"></div>
+
+      <CodeForge_breadcrumb></CodeForge_breadcrumb>
       <div class="CodeForge_actions">
           <icon-home />
           <CodeForge_theme></CodeForge_theme>
