@@ -2,7 +2,8 @@
 import type {Component} from "vue";
 import {IconHome, IconUser, IconSettings} from "@arco-design/web-vue/es/icon";
 import CodeForge_component from "@/components/common/CodeForge_component.vue";
-
+import {ref} from "vue";
+import {collapsed} from "@/components/admin/CodeForge_menu";
 
 interface MenuType {
   title: string
@@ -10,6 +11,8 @@ interface MenuType {
   icon?: string|Component
   children?: MenuType[]
 }
+
+
 
 const menuList : MenuType[] = [
   {title: "首页", name: "admin", icon: IconHome},
@@ -29,9 +32,10 @@ const menuList : MenuType[] = [
 </script>
 
 <template>
-  <div class="CodeForge_menu ">
+  <div class="CodeForge_menu" :class="{collapsed: collapsed}">
     <div class="CodeForge_menu_inner scrollbar">
       <a-menu
+          v-model:collapsed="collapsed"
           show-collapse-button>
         <template v-for="menu in menuList">
           <a-menu-item :key="menu.name" v-if="!menu.children">
@@ -61,13 +65,17 @@ const menuList : MenuType[] = [
 .CodeForge_menu {
   height: calc(100vh - 90px);
 
+
+  &.collapsed {
+    .arco-menu-collapse-button{
+      left: 48px !important;
+    }
+  }
   &:hover {
     .arco-menu-collapse-button{
       opacity: 1 !important;
     }
-
   }
-
 
   .CodeForge_menu_inner.scrollbar {
     height: 100%;
@@ -76,7 +84,6 @@ const menuList : MenuType[] = [
 
     .arco-menu{
       position: static;
-      height: 100%;
       .arco-menu-collapse-button{
         top: 50%;
         transform: translate(-50%, -50%);

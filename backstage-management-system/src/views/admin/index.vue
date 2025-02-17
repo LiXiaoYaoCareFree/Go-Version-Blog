@@ -4,11 +4,12 @@
 import CodeForge_theme from "@/components/common/CodeForge_theme.vue";
 import CodeForge_screen from "@/components/common/CodeForge_screen.vue";
 import CodeForge_menu from "@/components/admin/CodeForge_menu.vue";
+import {collapsed} from "@/components/admin/CodeForge_menu";
 </script>
 
 <template>
 <div class="CodeForge_admin">
-  <div class="CodeForge_aside">
+  <div class="CodeForge_aside" :class="{collapsed: collapsed}">
     <div class="CodeForge_logo">
 
     </div>
@@ -48,10 +49,9 @@ import CodeForge_menu from "@/components/admin/CodeForge_menu.vue";
   .CodeForge_aside {
     width: 240px;
     height: 100vh;
-    overflow-y: hidden;
-    overflow-x: hidden;
     border-right: 1px solid @color-border-1;
     background-color:   @color-fill-1;
+    transition: width 0.3s;
 
 
     .CodeForge_logo {
@@ -59,11 +59,20 @@ import CodeForge_menu from "@/components/admin/CodeForge_menu.vue";
       height: 90px;
       border-bottom: 1px solid var(--color-neutral-2);
     }
+
+    &.collapsed {
+      width: 48px;
+
+      &~.CodeForge_main{
+        width:calc(100% - 48px);
+      }
+
+    }
   }
 
   .CodeForge_main {
     width: calc(100% - 240px);
-
+    transition: width 0.3s;
 
     .CodeForge_head {
       width: 100%;
