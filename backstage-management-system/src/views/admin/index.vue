@@ -7,6 +7,7 @@ import CodeForge_breadcrumb from "@/components/admin/CodeForge_breadcrumb.vue";
 import CodeForge_user_dropdown from "@/components/common/CodeForge_user_dropdown.vue";
 import router from "@/router"
 import CodeForge_tabs from "@/components/admin/CodeForge_tabs.vue";
+import CodeForge_logo from "@/components/admin/CodeForge_logo.vue";
 
 
 function goHome() {
@@ -19,9 +20,7 @@ function goHome() {
 <template>
 <div class="CodeForge_admin">
   <div class="CodeForge_aside" :class="{collapsed: collapsed}">
-    <div class="CodeForge_logo">
-
-    </div>
+    <CodeForge_logo></CodeForge_logo>
     <CodeForge_menu></CodeForge_menu>
   </div>
   <div class="CodeForge_main">

@@ -31,8 +31,8 @@ const options: OptionType[] = [
   <a-dropdown @select="handleSelect" :popup-max-height="false">
     <div class="CodeForge_user_dropdown_com">
       <a-avatar
-          image-url="https://raw.githubusercontent.com/LiXiaoYaoCareFree/Go-Version-Blog/refs/heads/dev-BMS/CodeForge.jpg"></a-avatar>
-      <span class="user_name">CodeForge</span>
+          image-url="https://avatars.githubusercontent.com/u/188313914?v=4"></a-avatar>
+      <span class="user_name">LiXiaoYaoCareFree</span>
       <icon-down/>
     </div>
 
