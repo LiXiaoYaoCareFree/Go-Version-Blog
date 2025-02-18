@@ -13,3 +13,7 @@ declare module 'vue-router' {
         title: string;
     }
 }
+
+export interface EnvMeta extends Record<string, string>{
+    ViTE_SERVER_URL: string;
+}

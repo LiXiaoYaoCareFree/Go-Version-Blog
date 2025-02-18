@@ -3,12 +3,14 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
+    "dev1": "vite --mode dev1",
     "build": "run-p type-check build-only",
     "preview": "vite preview --port 4173",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "nprogress": "^0.2.0",
     "pinia": "^2.0.21",
     "swiper": "^11.2.4",
     "vue": "^3.2.38",
@@ -17,6 +19,7 @@
   "devDependencies": {
     "@arco-design/web-vue": "^2.56.3",
     "@types/node": "^16.11.56",
+    "@types/nprogress": "^0.2.3",
     "@vitejs/plugin-vue": "^3.0.3",
     "@vue/tsconfig": "^0.1.3",
     "less": "^4.2.2",
