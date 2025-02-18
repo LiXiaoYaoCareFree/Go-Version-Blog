@@ -3,6 +3,9 @@ import {IconClose} from "@arco-design/web-vue/es/icon";
 import {useRoute} from "vue-router";
 import router from "@/router";
 import {ref, watch} from "vue";
+import {Swiper, SwiperSlide} from 'swiper/vue';
+import {onMounted} from "vue";
+
 const route = useRoute();
 
 
@@ -80,19 +83,59 @@ watch(()=>route.name,()=>{
   }
 }, {immediate: true})
 
+const slidesCount = ref(100)
+onMounted(()=>{
+  //可显示的总宽度
+  const swiperDom = document.querySelector(".CodeForge_tabs_swiper") as HTMLDivElement
+  const swiperWidth = swiperDom.clientWidth
+  //实际的总宽度
+  const wrapperDom = document.querySelector(".CodeForge_tabs_swiper .swiper-wrapper") as HTMLDivElement
+  const wrapperWidth = wrapperDom.scrollWidth
+
+  if (swiperWidth > wrapperWidth) {
+    return
+  }
+  //如果实际的总宽度大于了显示的总宽度
+  const slideList = document.querySelectorAll(".CodeForge_tabs_swiper .swiper-slide")
+  let allWidth = 0
+  let index = 1
+
+  for (const slideListElement of slideList) {
+    allWidth += (slideListElement.clientWidth + 20)
+    index++
+    if (allWidth >= swiperWidth) {
+      break
+    }
+  }
+  slidesCount.value = index
+
+  const activeSlide = document.querySelector(".CodeForge_tabs_swiper .swiper_slide.active") as HTMLDivElement
+  if (activeSlide.offsetLeft > swiperWidth) {
+    const offsetLeft = swiperWidth - activeSlide.offsetLeft
+
+    setTimeout(()=>{
+      wrapperDom.style.transform = `translate3d(${offsetLeft}px, 0px, 0px)`
+    }, 1000)
+  }
+
+})
+
 
 </script>
 
 <template>
   <div class="CodeForge_tabs">
-    <div class="swiper">
-      <div class="item" @click="check(item)" :class="{active: route.name === item.name}" v-for="item in tabs">
-        {{ item.title }}
-        <span class="close" @click.stop="removeItem(item)" title="删除" v-if="item.name != 'home'">
+    <swiper class="CodeForge_tabs_swiper" :slide-per-view="slidesCount">
+      <swiper-slide v-for="item in tabs" :class="{active: route.name === item.name}">
+        <div class="item" @click="check(item)" :class="{active: route.name === item.name}">
+          {{ item.title }}
+          <span class="close" @click.stop="removeItem(item)" title="删除" v-if="item.name != 'home'">
         <IconClose></IconClose>
       </span>
-      </div>
-    </div>
+        </div>
+      </swiper-slide>
+    </swiper>
+
     <div class="item" @click="removeAllItem(item)">
       删除全部
     </div>
@@ -110,8 +153,18 @@ watch(()=>route.name,()=>{
     width: calc(100% - 100px);
     display: flex;
     overflow-y: hidden;
-    overflow-x: auto;
+    overflow-x: hidden;
 
+
+    .swiper-wrapper {
+      display: flex;
+      align-items: center;
+
+      .swiper-slide {
+        width: fit-content !important;
+        flex-shrink: 0;
+      }
+    }
   }
 
 
