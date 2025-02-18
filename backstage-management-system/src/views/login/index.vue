@@ -6,7 +6,7 @@
   <div class="login_view">
     <div class="login_mask">
       <a-form :label-col-props="{span: 0}" :wrapper-col-props="{span:24}">
-        <div class="title">用户登陆</div>
+        <div class="title">用户登录</div>
         <a-form-item label="用户名">
           <a-input placeholder="用户名">
             <template #prefix>
@@ -31,28 +31,37 @@
 
 <style lang="less">
 .login_view {
-  background: url("") 50% / cover no-repeat;
+  background: url("https://raw.githubusercontent.com/LiXiaoYaoCareFree/Go-Version-Blog/refs/heads/dev-BMS/backstage-management-system/screen_photo/1.jpg") 50% / cover no-repeat;
   position: relative;
   height: 100vh;
+
   .login_mask {
     width: 400px;
     height: 100vh;
-    background-color: rgba(white, 0.8);
+    //background-color: rgba(white, 0.8);
+    background: transparent;
     position: absolute;
-    right: 0;
-    top: 0;
+    right: 660px;
+    top: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
-    .arco-form{
+
+    .arco-form {
       padding: 40px;
-    }
-    .title {
-      font-size: 26px;
-      font-weight: 600;
-      text-align: center;
-      color: @primary-6;
-      margin-bottom: 10px;
+
+      .arco-btn-primary {
+        background-color: rgb(var(--primary-4));
+        border: 1px solid transparent;
+      }
+
+      .title {
+        font-size: 26px;
+        font-weight: 600;
+        text-align: center;
+        color: @primary-2;
+        margin-bottom: 10px;
+      }
     }
   }
 }
