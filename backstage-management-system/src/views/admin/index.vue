@@ -37,8 +37,12 @@ function goHome() {
       </div>
     </div>
     <CodeForge_tabs></CodeForge_tabs>
-    <div class="CodeForge_container">
-      <router-view></router-view>
+    <div class="CodeForge_container scrollbar">
+      <router-view class="CodeForge_base_view" v-slot="{Component}">
+        <transition name="fade" mode="out-in">
+          <component :is="Component"></component>
+        </transition>
+      </router-view>
     </div>
   </div>
 </div>
@@ -51,6 +55,7 @@ function goHome() {
   display: flex;
   background-color: var(--color-bg-1);
   color: @color-text-1;
+
 
   .CodeForge_aside {
     width: 240px;
@@ -78,7 +83,7 @@ function goHome() {
 
   .CodeForge_main {
     width: calc(100% - 240px);
-    transition: width 0.3s;
+    transition: width .3s;
 
     .CodeForge_head {
       width: 100%;
@@ -112,14 +117,48 @@ function goHome() {
 
     .CodeForge_container {
       width: 100%;
-      height: calc(100% - 90px);
+      height: calc(100vh - 90px);
       overflow-y: auto;
       overflow-x: hidden;
       background-color: @color-fill-2;
+      padding: 20px;
+
+
+    }
+    .CodeForge_base_view {
+      background-color: var(--color-bg-1);
+      border-radius: 5px;
+      height: 1000px;
+
     }
   }
 }
 
+// 组件刚开始离开
+.fade-leave-active{
 
+}
+// 组件离开结束
+.fade-leave-to {
+  transform: translateX(30px);
+  opacity: 0;
+}
+
+// 组件刚开始进入
+.fade-enter-active {
+  transform: translateX(-30px);
+  opacity: 0;
+}
+
+// 组件进入完成
+.fade-enter-to {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+// 正在进入和离开
+.fade-leave-active, .fade-enter-active {
+  transition: all .3s ease-out;
+}
 
 </style>
