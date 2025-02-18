@@ -31,7 +31,7 @@
 
 <style lang="less">
 .login_view {
-  background: url(https://www.fengfengzhidao.com/image/bg.png) 50% / cover no-repeat;
+  background: url("") 50% / cover no-repeat;
   position: relative;
   height: 100vh;
   .login_mask {
