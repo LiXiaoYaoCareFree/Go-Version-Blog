@@ -2,19 +2,24 @@ package middleware
 
 import (
 	"Blog-Server/service/log_service"
-	"fmt"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 type ResponseWriter struct {
 	gin.ResponseWriter
 	Body []byte
+	Head http.Header
 }
 
 func (w *ResponseWriter) Write(data []byte) (int, error) {
 	w.Body = append(w.Body, data...)
-	fmt.Println("response: ", string(data))
+
 	return w.ResponseWriter.Write(data)
+}
+
+func (w *ResponseWriter) Header() http.Header {
+	return w.Head
 }
 
 func LogMiddleware(c *gin.Context) {
@@ -26,11 +31,13 @@ func LogMiddleware(c *gin.Context) {
 
 	res := &ResponseWriter{
 		ResponseWriter: c.Writer,
+		Head:           make(http.Header),
 	}
 
 	c.Writer = res
 	c.Next()
 	//响应中间件
 	log.SetResponse(res.Body)
+	log.SetResponseHeader(res.Head)
 	log.Save()
 }

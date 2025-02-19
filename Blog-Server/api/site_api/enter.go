@@ -3,7 +3,6 @@ package site_api
 import (
 	"Blog-Server/models/enum"
 	"Blog-Server/service/log_service"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
 	"time"
@@ -13,7 +12,6 @@ type SiteApi struct {
 }
 
 func (SiteApi) SiteInfoView(c *gin.Context) {
-	fmt.Println("1")
 	log_service.NewLoginSuccess(c, enum.UserPwdLoginType)
 	log_service.NewLoginFail(c, enum.UserPwdLoginType, "用户不存在", "lingyuan", "1234")
 	c.JSON(200, gin.H{"code": 0, "msg": "站点信息"})
@@ -28,9 +26,14 @@ func (SiteApi) SiteUpdateView(c *gin.Context) {
 	log := log_service.GetLog(c)
 
 	log.ShowRequest()
+	log.ShowRequestHeader()
+	log.ShowResponseHeader()
 	log.ShowResponse()
 	log.SetTitle("更新站点")
 	log.SetItemInfo("请求时间", time.Now())
+	log.SetImage("/xxx/xxx")
+	log.SetLink("yaml学习地址", "https://www.fengfengzhidao.com")
+	c.Header("xxx", "xxee")
 
 	var cr SiteUpdateRequest
 	err := c.ShouldBindJSON(&cr)
