@@ -3,8 +3,8 @@ package site_api
 import (
 	"Blog-Server/models/enum"
 	"Blog-Server/service/log_service"
+	"fmt"
 	"github.com/gin-gonic/gin"
-	"github.com/sirupsen/logrus"
 	"time"
 )
 
@@ -19,7 +19,7 @@ func (SiteApi) SiteInfoView(c *gin.Context) {
 }
 
 type SiteUpdateRequest struct {
-	Name string `json:"name"`
+	Name string `json:"name" binding:"required"`
 }
 
 func (SiteApi) SiteUpdateView(c *gin.Context) {
@@ -38,12 +38,16 @@ func (SiteApi) SiteUpdateView(c *gin.Context) {
 	var cr SiteUpdateRequest
 	err := c.ShouldBindJSON(&cr)
 	if err != nil {
-		logrus.Errorf(err.Error())
+		log.SetError("参数绑定失败", err)
 	}
 	log.SetItemInfo("结构体", cr)
 	log.SetItemInfo("切片", []string{"a", "b"})
 	log.SetItemInfo("字符串", "你好")
 	log.SetItemInfo("数字", 123)
-	c.JSON(200, gin.H{"code": 0, "msg": "站点信息"})
+	id := log.Save()
+	fmt.Println(1, id)
+	id = log.Save()
+	fmt.Println(2, id)
+	c.JSON(200, gin.H{"code": 0, "msg": "站点信息", "data": 1})
 	return
 }
