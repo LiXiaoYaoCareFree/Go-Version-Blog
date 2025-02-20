@@ -6,6 +6,11 @@ system:
 log:
   app: Blog-Server
   dir: logs
+ai:
+  enable: false
+  secretKey: njdfnhj6344t45347gsdhgsdh
+  nickname: 小李
+  avatar: /xxx/xxx
 jwt:
   expire: 3
   secret: xxx
