@@ -2,3 +2,9 @@
 [2025-02-20 09:15:15] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
 [2025-02-20 09:38:46] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
 [2025-02-20 09:42:58] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-02-20 10:39:01] [36m[info][0m init_db.go:29 Blog-Server/core.InitDB 数据库连接成功!
+[2025-02-20 10:39:01] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-02-20 10:44:59] [36m[info][0m init_db.go:29 Blog-Server/core.InitDB 数据库连接成功!
+[2025-02-20 10:44:59] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-02-20 10:47:58] [36m[info][0m init_db.go:29 Blog-Server/core.InitDB 数据库连接成功!
+[2025-02-20 10:47:58] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
