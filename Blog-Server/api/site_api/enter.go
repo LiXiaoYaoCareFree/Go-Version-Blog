@@ -3,14 +3,54 @@ package site_api
 
 import (
 	"Blog-Server/common/res"
+	"Blog-Server/global"
+	"Blog-Server/middleware"
 	"github.com/gin-gonic/gin"
 )
 
 type SiteApi struct {
 }
 
+type SiteInfoRequest struct {
+	Name string `uri:"name"`
+}
+
 func (SiteApi) SiteInfoView(c *gin.Context) {
-	res.OkWithData("xx", c)
+	var cr SiteInfoRequest
+	err := c.ShouldBindUri(&cr)
+	if err != nil {
+		res.FailWithError(err, c)
+		return
+	}
+
+	if cr.Name == "site" {
+		res.OkWithData(global.Config.Site, c)
+		return
+	}
+
+	// 判断角色是不是管理员
+	middleware.AdminMiddleware(c)
+	_, ok := c.Get("claims")
+	if !ok {
+		return
+	}
+
+	var data any
+	switch cr.Name {
+	case "email":
+		data = global.Config.Email
+	case "qq":
+		data = global.Config.QQ
+	case "qiNiu":
+		data = global.Config.QiNiu
+	case "ai":
+		data = global.Config.Ai
+	default:
+		res.FailWithMsg("不存在的配置", c)
+		return
+	}
+	res.OkWithData(data, c)
+
 	return
 }
 
