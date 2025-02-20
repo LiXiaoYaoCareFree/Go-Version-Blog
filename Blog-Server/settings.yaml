@@ -6,6 +6,10 @@ system:
 log:
   app: Blog-Server
   dir: logs
+jwt:
+  expire: 3
+  secret: xxx
+  issuer: lingyuan
 db:
   user: root
   password: root
