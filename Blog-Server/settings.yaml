@@ -10,6 +10,10 @@ jwt:
   expire: 3
   secret: xxx
   issuer: lingyuan
+redis:
+  addr: 127.0.0.1:6379
+  password: 1234
+  db: 2
 db:
   user: root
   password: root
