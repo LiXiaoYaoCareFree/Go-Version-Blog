@@ -32,14 +32,14 @@ redis:
   db: 2
 site:
   siteInfo:
-    title: CodeForge
+    title: CodeForge1
     logo: ""
     beian: ""
     mode: 1
   project:
-    title: ""
-    icon: ""
-    webPath: ""
+    title: CodeForge
+    icon: /xxx.png
+    webPath: uploads/index.html
   seo:
     keywords: ""
     description: ""
