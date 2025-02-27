@@ -1,2 +1,14 @@
 [2025-02-27 17:06:13] [31m[fatal][0m init_db.go:22 Blog-Server/core.InitDB 数据库连接失败 Error 1049 (42000): Unknown database 'blogx'
 [2025-02-27 17:06:39] [36m[info][0m init_db.go:29 Blog-Server/core.InitDB 数据库连接成功!
+[2025-02-27 20:21:10] [36m[info][0m init_db.go:29 Blog-Server/core.InitDB 数据库连接成功!
+[2025-02-27 20:21:10] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-02-27 20:37:09] [36m[info][0m init_db.go:29 Blog-Server/core.InitDB 数据库连接成功!
+[2025-02-27 20:37:09] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-02-27 20:39:54] [36m[info][0m init_db.go:29 Blog-Server/core.InitDB 数据库连接成功!
+[2025-02-27 20:39:54] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-02-27 20:43:24] [36m[info][0m init_db.go:29 Blog-Server/core.InitDB 数据库连接成功!
+[2025-02-27 20:43:24] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-02-27 21:07:46] [36m[info][0m init_db.go:29 Blog-Server/core.InitDB 数据库连接成功!
+[2025-02-27 21:07:46] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-02-27 21:18:04] [36m[info][0m init_db.go:29 Blog-Server/core.InitDB 数据库连接成功!
+[2025-02-27 21:18:04] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功

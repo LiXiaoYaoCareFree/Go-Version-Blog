@@ -6,6 +6,10 @@ system:
 log:
   app: Blog-Server
   dir: logs
+jwt:
+  expire: 3
+  secret: xxx
+  issuer: lingyuan
 db:
   user: root
   password: root
@@ -22,10 +26,6 @@ db1:
   db: blogx
   debug: false
   source: mysql
-jwt:
-  expire: 3
-  secret: xxx
-  issuer: lingyuan
 redis:
   addr: 127.0.0.1:6379
   password: "1234"
