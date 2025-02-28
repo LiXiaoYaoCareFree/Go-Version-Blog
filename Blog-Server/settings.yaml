@@ -69,12 +69,12 @@ site:
   article:
     noExamine: true
 email:
-  domain: ""
-  port: 0
-  sendEmail: ""
-  authCode: ""
-  sendNickname: ""
-  ssl: false
+  domain: smtp.qq.com
+  port: 587
+  sendEmail: 2210127151@qq.com
+  authCode: zhflwiskxbyueafh
+  sendNickname: LiXiaoYaoCareFree
+  ssl: true
   tls: false
 qq:
   appID: "2210127151"
