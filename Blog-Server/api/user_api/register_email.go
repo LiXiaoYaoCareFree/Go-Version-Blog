@@ -8,6 +8,7 @@ import (
 	"Blog-Server/models/enum"
 	"Blog-Server/utils/email_store"
 	"Blog-Server/utils/jwts"
+	"Blog-Server/utils/pwd"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/mojocn/base64Captcha"
@@ -47,13 +48,14 @@ func (UserApi) RegisterEmailView(c *gin.Context) {
 	// 创建用户
 	uname := base64Captcha.RandText(5, "0123456789")
 
+	hashPwd, _ := pwd.GenerateFromPassword(cr.Pwd)
 	var user = models.UserModel{
 		Username:       fmt.Sprintf("b_%s", uname),
 		Nickname:       "邮箱用户",
 		RegisterSource: enum.RegisterEmailSourceType,
-		//Password: cr.Pwd,
-		Email: info.Email,
-		Role:  enum.UserRole,
+		Password:       hashPwd,
+		Email:          info.Email,
+		Role:           enum.UserRole,
 	}
 
 	err = global.DB.Create(&user).Error
