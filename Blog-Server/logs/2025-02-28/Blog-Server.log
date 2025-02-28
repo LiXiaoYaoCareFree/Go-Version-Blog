@@ -21,3 +21,18 @@
 [2025-02-28 17:59:11] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
 [2025-02-28 19:42:29] [36m[info][0m init_db.go:29 Blog-Server/core.InitDB 数据库连接成功!
 [2025-02-28 19:42:29] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-02-28 22:59:11] [36m[info][0m init_db.go:29 Blog-Server/core.InitDB 数据库连接成功!
+[2025-02-28 22:59:11] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-02-28 23:02:26] [36m[info][0m init_db.go:29 Blog-Server/core.InitDB 数据库连接成功!
+[2025-02-28 23:02:26] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-02-28 23:22:19] [36m[info][0m init_db.go:29 Blog-Server/core.InitDB 数据库连接成功!
+[2025-02-28 23:22:19] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-02-28 23:22:30] [31m[error][0m captcha_middleware.go:32 Blog-Server/middleware.CaptchaMiddleware 图形验证失败 Key: 'CaptchaMiddlewareRequest.captchaID---CaptchaID' Error:Field validation for 'captchaID---CaptchaID' failed on the 'required' tag
+Key: 'CaptchaMiddlewareRequest.captchaCode---CaptchaCode' Error:Field validation for 'captchaCode---CaptchaCode' failed on the 'required' tag
+[2025-02-28 23:24:49] [31m[error][0m captcha_middleware.go:32 Blog-Server/middleware.CaptchaMiddleware 图形验证失败 invalid character 's' looking for beginning of value
+[2025-02-28 23:25:48] [36m[info][0m init_db.go:29 Blog-Server/core.InitDB 数据库连接成功!
+[2025-02-28 23:25:48] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-02-28 23:26:01] [31m[error][0m captcha_middleware.go:32 Blog-Server/middleware.CaptchaMiddleware 图形验证失败 invalid character 's' looking for beginning of value
+[2025-02-28 23:26:22] [31m[error][0m captcha_middleware.go:32 Blog-Server/middleware.CaptchaMiddleware 图形验证失败 invalid character 'X' after object key:value pair
+[2025-02-28 23:27:24] [31m[error][0m captcha_middleware.go:32 Blog-Server/middleware.CaptchaMiddleware 图形验证失败 Key: 'CaptchaMiddlewareRequest.captchaID---CaptchaID' Error:Field validation for 'captchaID---CaptchaID' failed on the 'required' tag
+[2025-02-28 23:27:43] [31m[error][0m captcha_middleware.go:32 Blog-Server/middleware.CaptchaMiddleware 图形验证失败 Key: 'CaptchaMiddlewareRequest.captchaID---CaptchaID' Error:Field validation for 'captchaID---CaptchaID' failed on the 'required' tag

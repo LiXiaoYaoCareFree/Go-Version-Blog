@@ -63,7 +63,7 @@ site:
     qqLogin: false
     usernamePwdLogin: false
     emailLogin: false
-    captcha: false
+    captcha: true
   indexRight:
     list: []
   article:
