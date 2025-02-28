@@ -1,5 +1,14 @@
 import axios from "axios";
 import {Message} from "@arco-design/web-vue";
+import {userStorei} from "@/stores/user_store";
+
+export interface baseResponse<T> {
+    code: number;
+    msg: string;
+    data: T
+}
+
+
 
 
 
@@ -11,7 +20,8 @@ export const useAxios = axios.create({
 
 
 useAxios.interceptors.request.use((config) => {
-    config.headers.set("token", "xxx")
+    const userStore = userStorei()
+    config.headers.set("token", userStore.userInfo.token)
     return config
 })
 
