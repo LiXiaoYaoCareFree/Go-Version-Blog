@@ -81,14 +81,15 @@ qq:
   appKey: ""
   redirect: http://xxxxx
 qiNiu:
-  enable: false
-  accessKey: ""
-  secretKey: ""
-  bucket: ""
-  uri: ""
-  region: ""
-  prefix: ""
-  size: 0
+  enable: true
+  accessKey: iAGmqdbwnY6ZZZPA_q79oHytI3kRv382F5KqukWB
+  secretKey: HyNEbrunPiCovBR92wahb6pXAutk3zGifKNEi6-X
+  bucket: codeforge
+  uri: http://ssdeemm5d.hb-bkt.clouddn.com
+  region: z1
+  prefix: blogx
+  size: 3
+  expiry: 60
 ai:
   enable: false
   secretKey: njdfnhj6344t45347gsdhgsdh
