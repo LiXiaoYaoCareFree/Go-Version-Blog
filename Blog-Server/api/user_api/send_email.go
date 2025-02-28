@@ -6,6 +6,7 @@ import (
 	"Blog-Server/global"
 	"Blog-Server/models"
 	"Blog-Server/service/email_service"
+	"Blog-Server/utils/email_store"
 	"github.com/gin-gonic/gin"
 	"github.com/mojocn/base64Captcha"
 	"github.com/sirupsen/logrus"
@@ -47,7 +48,10 @@ func (UserApi) SendEmailView(c *gin.Context) {
 		res.FailWithMsg("邮件发送失败", c)
 		return
 	}
-	global.CaptchaStore.Set(id, code)
+	global.EmailVerifyStore.Store(id, email_store.EmailStoreInfo{
+		Email: cr.Email,
+		Code:  code,
+	})
 	res.OkWithData(SendEmailResponse{
 		EmailID: id,
 	}, c)
