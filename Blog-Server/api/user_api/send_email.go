@@ -36,7 +36,7 @@ func (UserApi) SendEmailView(c *gin.Context) {
 		var user models.UserModel
 		err = global.DB.Take(&user, "email = ?", cr.Email).Error
 		if err == nil {
-			res.FailWithMsg("该邮箱以使用", c)
+			res.FailWithMsg("该邮箱已使用", c)
 			return
 		}
 		err = email_service.SendRegisterCode(cr.Email, code)
@@ -48,10 +48,9 @@ func (UserApi) SendEmailView(c *gin.Context) {
 		res.FailWithMsg("邮件发送失败", c)
 		return
 	}
-	global.EmailVerifyStore.Store(id, email_store.EmailStoreInfo{
-		Email: cr.Email,
-		Code:  code,
-	})
+
+	email_store.Set(id, cr.Email, code)
+
 	res.OkWithData(SendEmailResponse{
 		EmailID: id,
 	}, c)
