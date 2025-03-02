@@ -5,6 +5,7 @@ import (
 	"Blog-Server/common/res"
 	"Blog-Server/global"
 	"Blog-Server/models"
+	"Blog-Server/service/user_service"
 	"Blog-Server/utils/jwts"
 	"Blog-Server/utils/pwd"
 	"github.com/gin-gonic/gin"
@@ -45,6 +46,6 @@ func (UserApi) PwdLoginApi(c *gin.Context) {
 		Username: user.Username,
 		Role:     user.Role,
 	})
-
+	user_service.NewUserService(user).UserLogin(c)
 	res.OkWithData(token, c)
 }

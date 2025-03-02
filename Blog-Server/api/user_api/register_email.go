@@ -6,6 +6,7 @@ import (
 	"Blog-Server/global"
 	"Blog-Server/models"
 	"Blog-Server/models/enum"
+	"Blog-Server/service/user_service"
 	"Blog-Server/utils/jwts"
 	"Blog-Server/utils/pwd"
 	"fmt"
@@ -64,6 +65,6 @@ func (UserApi) RegisterEmailView(c *gin.Context) {
 		res.FailWithMsg("邮箱登录失败", c)
 		return
 	}
-
+	user_service.NewUserService(user).UserLogin(c)
 	res.OkWithData(token, c)
 }
