@@ -3,6 +3,7 @@ package models
 
 import (
 	"Blog-Server/models/enum"
+	"gorm.io/gorm"
 	"time"
 )
 
@@ -18,6 +19,10 @@ type UserModel struct {
 	OpenID         string                  `gorm:"size:64" json:"openID"` // 第三方登陆的唯一id
 	Role           enum.RoleType           `json:"role"`                  // 角色  1  管理员  2  普通用户 3  访客
 	UserConfModel  *UserConfModel          `gorm:"foreignKey:UserID"  json:"-"`
+}
+
+func (u *UserModel) AfterCreate(tx *gorm.DB) error {
+	return tx.Create(&UserConfModel{UserID: u.ID}).Error
 }
 
 type UserConfModel struct {
