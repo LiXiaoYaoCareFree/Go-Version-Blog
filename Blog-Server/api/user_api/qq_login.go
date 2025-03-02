@@ -25,6 +25,12 @@ func (UserApi) QQLoginView(c *gin.Context) {
 		res.FailWithError(err, c)
 		return
 	}
+
+	if !global.Config.Site.Login.QQLogin {
+		res.FailWithMsg("站点未启用QQ登陆", c)
+		return
+	}
+
 	info, err := qq_service.GetUserInfo(cr.Code)
 	if err != nil {
 		res.FailWithError(err, c)

@@ -61,9 +61,9 @@ site:
     github: ""
   login:
     qqLogin: false
-    usernamePwdLogin: false
+    usernamePwdLogin: true
     emailLogin: false
-    captcha: true
+    captcha: false
   indexRight:
     list: []
   article:
@@ -77,9 +77,9 @@ email:
   ssl: true
   tls: false
 qq:
-  appID:
+  appID: ""
   appKey:
-  redirect: 
+  redirect:
 qiNiu:
   enable: true
   accessKey: iAGmqdbwnY6ZZZPA_q79oHytI3kRv382F5KqukWB
