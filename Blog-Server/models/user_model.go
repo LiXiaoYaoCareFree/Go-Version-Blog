@@ -13,12 +13,11 @@ type UserModel struct {
 	Avatar         string                  `gorm:"size:256" json:"avatar"`
 	Abstract       string                  `gorm:"size:256" json:"abstract"`
 	RegisterSource enum.RegisterSourceType `json:"registerSource"`
-	CodeAge        int                     `json:"codeAge"` // 码龄
 	Password       string                  `gorm:"size:64" json:"-"`
 	Email          string                  `gorm:"size:256" json:"email"`
 	OpenID         string                  `gorm:"size:64" json:"openID"` // 第三方登陆的唯一id
 	Role           enum.RoleType           `json:"role"`                  // 角色  1  管理员  2  普通用户 3  访客
-
+	UserConfModel  *UserConfModel          `gorm:"foreignKey:UserID"  json:"-"`
 }
 
 type UserConfModel struct {
