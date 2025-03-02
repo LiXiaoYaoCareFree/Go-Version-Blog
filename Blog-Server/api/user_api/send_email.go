@@ -16,6 +16,7 @@ type SendEmailRequest struct {
 	Type  int8   `json:"type" binding:"oneof=1 2"` // 1 注册 2 重置密码
 	Email string `json:"email" binding:"required"`
 }
+
 type SendEmailResponse struct {
 	EmailID string `json:"emailID"`
 }
