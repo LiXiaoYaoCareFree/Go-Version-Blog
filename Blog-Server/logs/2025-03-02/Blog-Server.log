@@ -58,3 +58,10 @@
 [2025-03-02 20:21:52] [36m[info][0m enter.go:72 Blog-Server/flags/flag_user.FlagUser.Create 创建用户成功
 [2025-03-02 20:24:08] [36m[info][0m init_db.go:29 Blog-Server/core.InitDB 数据库连接成功!
 [2025-03-02 20:24:08] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-02 20:43:25] [36m[info][0m init_db.go:29 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-02 20:43:25] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-02 20:46:57] [36m[info][0m init_db.go:29 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-02 20:46:57] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-02 20:47:16] [36m[info][0m enter.go:72 Blog-Server/flags/flag_user.FlagUser.Create 创建用户成功
+[2025-03-02 20:47:25] [36m[info][0m init_db.go:29 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-02 20:47:25] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
