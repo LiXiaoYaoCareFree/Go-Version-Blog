@@ -30,25 +30,16 @@ redis:
   addr: 127.0.0.1:6379
   password: "1234"
   db: 2
-upload:
-  size: 3
-  whiteList:
-    - jpg
-    - jpeg
-    - png
-    - webp
-    - gif
-  uploadDir: images001
 site:
   siteInfo:
-    title: CodeForge1
+    title: CodeForge
     logo: ""
     beian: ""
     mode: 1
   project:
-    title: CodeForge
-    icon: /xxx.png
-    webPath: uploads/index.html
+    title: ""
+    icon: ""
+    webPath: ""
   seo:
     keywords: ""
     description: ""
@@ -62,7 +53,7 @@ site:
   login:
     qqLogin: false
     usernamePwdLogin: true
-    emailLogin: false
+    emailLogin: true
     captcha: false
   indexRight:
     list: []
@@ -78,8 +69,8 @@ email:
   tls: false
 qq:
   appID: ""
-  appKey:
-  redirect:
+  appKey: ""
+  redirect: ""
 qiNiu:
   enable: true
   accessKey: iAGmqdbwnY6ZZZPA_q79oHytI3kRv382F5KqukWB
@@ -95,3 +86,12 @@ ai:
   secretKey: njdfnhj6344t45347gsdhgsdh
   nickname: 小李
   avatar: /xxx/xxx
+upload:
+  size: 3
+  whiteList:
+  - jpg
+  - jpeg
+  - png
+  - webp
+  - gif
+  uploadDir: images001
