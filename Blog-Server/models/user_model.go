@@ -4,6 +4,7 @@ package models
 import (
 	"Blog-Server/models/enum"
 	"gorm.io/gorm"
+	"math"
 	"time"
 )
 
@@ -19,10 +20,17 @@ type UserModel struct {
 	OpenID         string                  `gorm:"size:64" json:"openID"` // 第三方登陆的唯一id
 	Role           enum.RoleType           `json:"role"`                  // 角色  1  管理员  2  普通用户 3  访客
 	UserConfModel  *UserConfModel          `gorm:"foreignKey:UserID"  json:"-"`
+	IP             string                  `json:"ip"`
+	Addr           string                  `json:"addr"`
 }
 
 func (u *UserModel) AfterCreate(tx *gorm.DB) error {
 	return tx.Create(&UserConfModel{UserID: u.ID}).Error
+}
+
+func (u *UserModel) CodeAge() int {
+	sub := time.Now().Sub(u.CreatedAt)
+	return int(math.Ceil(sub.Hours() / 24 / 365))
 }
 
 type UserConfModel struct {
