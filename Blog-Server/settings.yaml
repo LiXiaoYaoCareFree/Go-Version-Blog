@@ -13,15 +13,15 @@ jwt:
 db:
   user: root
   password: root
-  host: 127.0.0.1
-  port: 3306
+  host: 192.168.179.135
+  port: 3307
   db: blogx
   debug: false
   source: mysql
 db1:
   user: root
   password: root
-  host: 127.0.0.1
+  host: 192.168.179.135
   port: 3306
   db: blogx
   debug: false
