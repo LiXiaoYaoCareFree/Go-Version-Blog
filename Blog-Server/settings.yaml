@@ -15,21 +15,20 @@ jwt:
   secret: xxx
   issuer: lingyuan
 db:
-  user: root
-  password: root
-  host: 192.168.179.135
-  port: 3307
-  db: blogx
-  debug: false
-  source: mysql
-db1:
-  user: root
-  password: root
-  host: 192.168.179.135
-  port: 3306
-  db: blogx
-  debug: false
-  source: mysql
+  - user: root
+    password: root
+    host: 192.168.179.135
+    port: 3306
+    db: blogx
+    debug: false
+    source: mysql
+  - user: root
+    password: root
+    host: 192.168.179.135
+    port: 3307
+    db: blogx
+    debug: false
+    source: mysql
 redis:
   addr: 127.0.0.1:6379
   password: "1234"
