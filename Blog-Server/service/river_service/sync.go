@@ -1,7 +1,9 @@
 package river
 
 import (
+	"Blog-Server/global"
 	"Blog-Server/service/river_service/elastic"
+	"Blog-Server/service/river_service/rule"
 	"bytes"
 	"encoding/json"
 	"fmt"
@@ -105,15 +107,12 @@ func (h *eventHandler) String() string {
 }
 
 func (r *River) syncLoop() {
-	bulkSize := r.c.BulkSize
+	bulkSize := global.Config.River.BulkSize
 	if bulkSize == 0 {
 		bulkSize = 128
 	}
 
-	interval := r.c.FlushBulkTime.Duration
-	if interval == 0 {
-		interval = 200 * time.Millisecond
-	}
+	interval := 200 * time.Millisecond
 
 	ticker := time.NewTicker(interval)
 	defer ticker.Stop()
@@ -170,7 +169,7 @@ func (r *River) syncLoop() {
 }
 
 // for insert and delete
-func (r *River) makeRequest(rule *Rule, action string, rows [][]interface{}) ([]*elastic.BulkRequest, error) {
+func (r *River) makeRequest(rule *rule.Rule, action string, rows [][]interface{}) ([]*elastic.BulkRequest, error) {
 	reqs := make([]*elastic.BulkRequest, 0, len(rows))
 
 	for _, values := range rows {
@@ -200,15 +199,15 @@ func (r *River) makeRequest(rule *Rule, action string, rows [][]interface{}) ([]
 	return reqs, nil
 }
 
-func (r *River) makeInsertRequest(rule *Rule, rows [][]interface{}) ([]*elastic.BulkRequest, error) {
+func (r *River) makeInsertRequest(rule *rule.Rule, rows [][]interface{}) ([]*elastic.BulkRequest, error) {
 	return r.makeRequest(rule, canal.InsertAction, rows)
 }
 
-func (r *River) makeDeleteRequest(rule *Rule, rows [][]interface{}) ([]*elastic.BulkRequest, error) {
+func (r *River) makeDeleteRequest(rule *rule.Rule, rows [][]interface{}) ([]*elastic.BulkRequest, error) {
 	return r.makeRequest(rule, canal.DeleteAction, rows)
 }
 
-func (r *River) makeUpdateRequest(rule *Rule, rows [][]interface{}) ([]*elastic.BulkRequest, error) {
+func (r *River) makeUpdateRequest(rule *rule.Rule, rows [][]interface{}) ([]*elastic.BulkRequest, error) {
 	if len(rows)%2 != 0 {
 		return nil, errors.Errorf("invalid update rows event, must have 2x rows, but %d", len(rows))
 	}
@@ -245,7 +244,6 @@ func (r *River) makeUpdateRequest(rule *Rule, rows [][]interface{}) ([]*elastic.
 
 			req = &elastic.BulkRequest{Index: rule.Index, Type: rule.Type, ID: afterID, Parent: afterParentID, Pipeline: rule.Pipeline}
 			r.makeInsertReqData(req, rule, rows[i+1])
-
 		} else {
 			if len(rule.Pipeline) > 0 {
 				// Pipelines can only be specified on index action
@@ -360,7 +358,7 @@ func (r *River) getFieldParts(k string, v string) (string, string, string) {
 	return mysql, elastic, fieldType
 }
 
-func (r *River) makeInsertReqData(req *elastic.BulkRequest, rule *Rule, values []interface{}) {
+func (r *River) makeInsertReqData(req *elastic.BulkRequest, rule *rule.Rule, values []interface{}) {
 	req.Data = make(map[string]interface{}, len(values))
 	req.Action = elastic.ActionIndex
 
@@ -382,7 +380,7 @@ func (r *River) makeInsertReqData(req *elastic.BulkRequest, rule *Rule, values [
 	}
 }
 
-func (r *River) makeUpdateReqData(req *elastic.BulkRequest, rule *Rule,
+func (r *River) makeUpdateReqData(req *elastic.BulkRequest, rule *rule.Rule,
 	beforeValues []interface{}, afterValues []interface{}) {
 	req.Data = make(map[string]interface{}, len(beforeValues))
 
@@ -414,7 +412,7 @@ func (r *River) makeUpdateReqData(req *elastic.BulkRequest, rule *Rule,
 
 // If id in toml file is none, get primary keys in one row and format them into a string, and PK must not be nil
 // Else get the ID's column in one row and format them into a string
-func (r *River) getDocID(rule *Rule, row []interface{}) (string, error) {
+func (r *River) getDocID(rule *rule.Rule, row []interface{}) (string, error) {
 	var (
 		ids []interface{}
 		err error
@@ -450,7 +448,7 @@ func (r *River) getDocID(rule *Rule, row []interface{}) (string, error) {
 	return buf.String(), nil
 }
 
-func (r *River) getParentID(rule *Rule, row []interface{}, columnName string) (string, error) {
+func (r *River) getParentID(rule *rule.Rule, row []interface{}, columnName string) (string, error) {
 	index := rule.TableInfo.FindColumn(columnName)
 	if index < 0 {
 		return "", errors.Errorf("parent id not found %s(%s)", rule.TableInfo.Name, columnName)

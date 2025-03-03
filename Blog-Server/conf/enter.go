@@ -13,4 +13,5 @@ type Config struct {
 	Ai     Ai     `yaml:"ai"`
 	Upload Upload `yaml:"upload"`
 	ES     ES     `yaml:"es"`
+	River  River  `yaml:"river"`
 }
