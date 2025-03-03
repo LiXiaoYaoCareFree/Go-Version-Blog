@@ -22,9 +22,9 @@ func (h *MyEventHandler) String() string {
 
 func main() {
 	cfg := canal.NewDefaultConfig()
-	cfg.Addr = "192.168.0.2:3306"
+	cfg.Addr = "192.168.179.135:3306"
 	cfg.User = "root"
-	cfg.Password = "123456"
+	cfg.Password = "root"
 	cfg.Dump.Databases = []string{"blogx"}
 	cfg.Dump.Tables = []string{}
 
