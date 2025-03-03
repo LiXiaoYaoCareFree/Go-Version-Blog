@@ -39,3 +39,25 @@
 [2025-03-03 17:37:34] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
 [2025-03-03 17:37:34] [36m[info][0m index.go:41 Blog-Server/service/es_service.DeleteIndex article_index 索引删除成功
 [2025-03-03 17:37:34] [36m[info][0m index.go:25 Blog-Server/service/es_service.CreateIndex article_index 索引创建成功
+[2025-03-03 17:52:29] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-03 17:52:29] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-03 17:52:29] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-03 18:08:17] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-03 18:08:17] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-03 18:08:17] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-03 18:08:18] [36m[info][0m flag_db.go:32 Blog-Server/flags.FlagDB 数据库迁移成功！
+[2025-03-03 19:36:11] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-03 19:36:11] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-03 19:36:11] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-03 19:36:21] [36m[info][0m enter.go:72 Blog-Server/flags/flag_user.FlagUser.Create 创建用户成功
+[2025-03-03 20:04:03] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-03 20:04:03] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-03 20:04:03] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-03 20:05:37] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-03 20:05:37] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-03 20:05:37] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-03 20:05:43] [31m[error][0m enter.go:39 Blog-Server/flags/flag_user.FlagUser.Create 此用户名已存在
+[2025-03-03 20:05:58] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-03 20:05:58] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-03 20:05:58] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-03 20:06:27] [36m[info][0m enter.go:72 Blog-Server/flags/flag_user.FlagUser.Create 创建用户成功
