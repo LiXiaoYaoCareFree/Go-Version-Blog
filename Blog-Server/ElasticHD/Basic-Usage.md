@@ -27,7 +27,16 @@ cd /opt/BlogX/Blog-Server/Blog-Server/ElasticHD/
 docker exec -it mysql-master bash
 mysql -u root -proot
 
+docker exec -it mysql-slave bash
+mysql -u root -proot
+
 systemctl daemon-reload
 systemctl restart docker
+
+
+
+SET NAMES utf8mb4;
+
+
 
 ```
