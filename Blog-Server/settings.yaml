@@ -6,6 +6,10 @@ system:
 log:
   app: Blog-Server
   dir: logs
+es:
+  url: http://192.168.179.135:9200
+  username:
+  password:
 jwt:
   expire: 3
   secret: xxx
