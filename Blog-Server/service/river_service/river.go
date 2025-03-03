@@ -1,7 +1,9 @@
 package river
 
 import (
+	"Blog-Server/global"
 	"Blog-Server/service/river_service/elastic"
+	"Blog-Server/service/river_service/rule"
 	"context"
 	"fmt"
 	"github.com/pingcap/errors"
@@ -19,11 +21,9 @@ var ErrRuleNotExist = errors.New("rule is not exist")
 // We use this definition here too, although it may not run within Elasticsearch.
 // Maybe later I can implement a acutal river in Elasticsearch, but I must learn java. :-)
 type River struct {
-	c *Config
-
 	canal *canal.Canal
 
-	rules map[string]*Rule
+	rules map[string]*rule.Rule
 
 	ctx    context.Context
 	cancel context.CancelFunc
@@ -38,16 +38,15 @@ type River struct {
 }
 
 // NewRiver creates the River from config
-func NewRiver(c *Config) (*River, error) {
+func NewRiver() (*River, error) {
 	r := new(River)
 
-	r.c = c
-	r.rules = make(map[string]*Rule)
+	r.rules = make(map[string]*rule.Rule)
 	r.syncCh = make(chan interface{}, 4096)
 	r.ctx, r.cancel = context.WithCancel(context.Background())
 
 	var err error
-	if r.master, err = loadMasterInfo(c.DataDir); err != nil {
+	if r.master, err = loadMasterInfo(global.Config.River.DataDir); err != nil {
 		return nil, errors.Trace(err)
 	}
 
@@ -69,10 +68,10 @@ func NewRiver(c *Config) (*River, error) {
 	}
 
 	cfg := new(elastic.ClientConfig)
-	cfg.Addr = r.c.ESAddr
-	cfg.User = r.c.ESUser
-	cfg.Password = r.c.ESPassword
-	cfg.HTTPS = r.c.ESHttps
+	cfg.Addr = global.Config.ES.Addr
+	cfg.User = global.Config.ES.Username
+	cfg.Password = global.Config.ES.Password
+	cfg.HTTPS = global.Config.ES.IsHttps
 	r.es = elastic.NewClient(cfg)
 
 	return r, nil
@@ -80,18 +79,17 @@ func NewRiver(c *Config) (*River, error) {
 
 func (r *River) newCanal() error {
 	cfg := canal.NewDefaultConfig()
-	cfg.Addr = r.c.MyAddr
-	cfg.User = r.c.MyUser
-	cfg.Password = r.c.MyPassword
-	cfg.Charset = r.c.MyCharset
-	cfg.Flavor = r.c.Flavor
+	db := global.Config.DB[0]
 
-	cfg.ServerID = r.c.ServerID
-	cfg.Dump.ExecutionPath = r.c.DumpExec
-	cfg.Dump.DiscardErr = false
-	cfg.Dump.SkipMasterData = r.c.SkipMasterData
+	cfg.Addr = db.Addr()
+	cfg.User = db.User
+	cfg.Password = db.Password
+	cfg.Charset = "utf8mb4"
+	cfg.Flavor = global.Config.River.Flavor
 
-	for _, s := range r.c.Sources {
+	cfg.ServerID = global.Config.River.ServerID
+
+	for _, s := range global.Config.River.Sources {
 		for _, t := range s.Tables {
 			cfg.IncludeTableRegex = append(cfg.IncludeTableRegex, s.Schema+"\\."+t)
 		}
@@ -137,7 +135,7 @@ func (r *River) newRule(schema, table string) error {
 		return errors.Errorf("duplicate source %s, %s defined in config", schema, table)
 	}
 
-	r.rules[key] = newDefaultRule(schema, table)
+	r.rules[key] = rule.NewDefaultRule(schema, table)
 	return nil
 }
 
@@ -158,10 +156,10 @@ func (r *River) updateRule(schema, table string) error {
 }
 
 func (r *River) parseSource() (map[string][]string, error) {
-	wildTables := make(map[string][]string, len(r.c.Sources))
+	wildTables := make(map[string][]string, len(global.Config.River.Sources))
 
 	// first, check sources
-	for _, s := range r.c.Sources {
+	for _, s := range global.Config.River.Sources {
 		if !isValidTables(s.Tables) {
 			return nil, errors.Errorf("wildcard * is not allowed for multiple tables")
 		}
@@ -219,9 +217,9 @@ func (r *River) prepareRule() error {
 		return errors.Trace(err)
 	}
 
-	if r.c.Rules != nil {
+	if global.Config.River.Rules != nil {
 		// then, set custom mapping rule
-		for _, rule := range r.c.Rules {
+		for _, rule := range global.Config.River.Rules {
 			if len(rule.Schema) == 0 {
 				return errors.Errorf("empty schema not allowed for rule")
 			}
@@ -237,7 +235,7 @@ func (r *River) prepareRule() error {
 					return errors.Errorf("wildcard table rule %s.%s must have a index, can not empty", rule.Schema, rule.Table)
 				}
 
-				rule.prepare()
+				rule.Prepare()
 
 				for _, table := range tables {
 					rr := r.rules[ruleKey(rule.Schema, table)]
@@ -252,23 +250,19 @@ func (r *River) prepareRule() error {
 				if _, ok := r.rules[key]; !ok {
 					return errors.Errorf("rule %s, %s not defined in source", rule.Schema, rule.Table)
 				}
-				rule.prepare()
+				rule.Prepare()
 				r.rules[key] = rule
 			}
 		}
 	}
 
-	rules := make(map[string]*Rule)
+	rules := make(map[string]*rule.Rule)
 	for key, rule := range r.rules {
 		if rule.TableInfo, err = r.canal.GetTable(rule.Schema, rule.Table); err != nil {
 			return errors.Trace(err)
 		}
 
 		if len(rule.TableInfo.PKColumns) == 0 {
-			if !r.c.SkipNoPkTable {
-				return errors.Errorf("%s.%s must have a PK for a column", rule.Schema, rule.Table)
-			}
-
 			log.Errorf("ignored table without a primary key: %s\n", rule.TableInfo.Name)
 		} else {
 			rules[key] = rule

@@ -16,7 +16,7 @@ func main() {
 	global.ESClient = core.EsConnect()
 
 	flags.Run()
-
+	core.InitMysqlES()
 	//启动web程序
 	router.Run()
 }
