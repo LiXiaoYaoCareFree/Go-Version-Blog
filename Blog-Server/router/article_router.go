@@ -1,0 +1,14 @@
+// router/site_router.go
+package router
+
+import (
+	"Blog-Server/api"
+	"Blog-Server/api/article_api"
+	"Blog-Server/middleware"
+	"github.com/gin-gonic/gin"
+)
+
+func ArticleRouter(r *gin.RouterGroup) {
+	app := api.App.ArticleApi
+	r.POST("article", middleware.AuthMiddleware, middleware.BindJsonMiddleware[article_api.ArticleCreateRequest], app.ArticleCreateView)
+}
