@@ -74,6 +74,7 @@ func (ArticleApi) ArticleCreateView(c *gin.Context) {
 	}
 
 	// 正文内容图片转存
+	// 1.图片过多，同步做，接口耗时高  异步做，
 
 	var article = models.ArticleModel{
 		Title:       cr.Title,
