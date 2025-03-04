@@ -1,0 +1,19 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>xss演示</title>
+</head>
+<body>
+
+<article>
+    <h2>dgnjdj</h2>
+    <p>dgnjdj</p>
+    <a href="">dgnjdj</a>
+    <!--    <script>alert(1)</script>-->
+    <img src="x" onerror="alert(2)" alt="">
+    <iframe></iframe>
+</article>
+</body>
+</html>
