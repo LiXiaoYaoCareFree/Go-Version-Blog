@@ -6,3 +6,4 @@ uploads/*
 !/Blog-Server/settings.yaml
 !/Blog-Server/settings_dev.yaml
 !/Blog-Server/utils/pwd/
+!/Blog-Server/xx.jpg
