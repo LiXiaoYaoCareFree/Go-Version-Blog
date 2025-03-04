@@ -3,10 +3,13 @@ package article_api
 import (
 	"Blog-Server/common"
 	"Blog-Server/common/res"
+	"Blog-Server/global"
 	"Blog-Server/middleware"
 	"Blog-Server/models"
 	"Blog-Server/models/enum"
 	"Blog-Server/utils/jwts"
+	"Blog-Server/utils/sql"
+	"fmt"
 	"github.com/gin-gonic/gin"
 )
 
@@ -26,6 +29,8 @@ type ArticleListResponse struct {
 
 func (ArticleApi) ArticleListView(c *gin.Context) {
 	cr := middleware.GetBind[ArticleListRequest](c)
+
+	var topArticleIDList []uint // [1 2 3] => (1,2,3)
 
 	switch cr.Type {
 	case 1:
@@ -56,20 +61,38 @@ func (ArticleApi) ArticleListView(c *gin.Context) {
 		}
 	}
 
+	var userTopMap = map[uint]bool{}
+	var adminTopMap = map[uint]bool{}
+	if cr.UserID != 0 {
+		var userTopArticleList []models.UserTopArticleModel
+		global.DB.Preload("UserModel").Order("created_at desc").Find(&userTopArticleList, "user_id = ?", cr.UserID)
+
+		for _, i2 := range userTopArticleList {
+			topArticleIDList = append(topArticleIDList, i2.ArticleID)
+			if i2.UserModel.Role == enum.AdminRole {
+				adminTopMap[i2.ArticleID] = true
+			}
+			userTopMap[i2.ArticleID] = true
+		}
+	}
+
 	_list, count, _ := common.ListQuery(models.ArticleModel{
 		UserID:     cr.UserID,
 		CategoryID: cr.CategoryID,
 		Status:     cr.Status,
 	}, common.Options{
-		Likes:    []string{"title"},
-		PageInfo: cr.PageInfo,
+		Likes:        []string{"title"},
+		PageInfo:     cr.PageInfo,
+		DefaultOrder: fmt.Sprintf("%s, created_at desc", sql.ConvertSliceOrderSql(topArticleIDList)),
 	})
-
+	fmt.Printf("%s\n", sql.ConvertSliceOrderSql(topArticleIDList))
 	var list = make([]ArticleListResponse, 0)
 	for _, model := range _list {
 		model.Content = ""
 		list = append(list, ArticleListResponse{
 			ArticleModel: model,
+			UserTop:      userTopMap[model.ID],
+			AdminTop:     adminTopMap[model.ID],
 		})
 	}
 	res.OkWithList(list, count, c)
