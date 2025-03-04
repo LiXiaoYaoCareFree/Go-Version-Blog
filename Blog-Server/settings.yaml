@@ -12,7 +12,7 @@ es:
   username:
   password:
 river:
-  enable: false
+  enable: true
   server_id: 1001
   flavor: mysql
   data_dir: ./var
