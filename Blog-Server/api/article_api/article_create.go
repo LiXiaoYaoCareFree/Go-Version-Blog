@@ -87,7 +87,7 @@ func (ArticleApi) ArticleCreateView(c *gin.Context) {
 		CategoryID:  cr.CategoryID,
 		Status:      cr.Status,
 	}
-	if global.Config.Site.Article.NoExamine {
+	if cr.Status == enum.ArticleStatusExamine && global.Config.Site.Article.NoExamine {
 		article.Status = enum.ArticleStatusPublished
 	}
 
