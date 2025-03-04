@@ -9,8 +9,7 @@ import (
 	"Blog-Server/models/enum"
 	"Blog-Server/utils/jwts"
 	"Blog-Server/utils/markdown"
-	"bytes"
-	"github.com/PuerkitoBio/goquery"
+	"Blog-Server/utils/xss"
 	"github.com/gin-gonic/gin"
 )
 
@@ -45,32 +44,18 @@ func (ArticleApi) ArticleCreateView(c *gin.Context) {
 	}
 
 	// 文章正文防xss注入
-	contentDoc, err := goquery.NewDocumentFromReader(bytes.NewReader([]byte(cr.Content)))
-	if err != nil {
-		res.FailWithMsg("正文解析错误", c)
-		return
-	}
-	contentDoc.Find("script").Remove()
-	contentDoc.Find("img").Remove()
-	contentDoc.Find("iframe").Remove()
-
-	cr.Content = contentDoc.Text()
+	cr.Content = xss.XSSFilter(cr.Content)
 
 	// 如果不传简介，那么从正文中取前30个字符
 	if cr.Abstract == "" {
-		// 把markdown转成html，再取文本
-		html := markdown.MdToHtml(cr.Content)
-		doc, err := goquery.NewDocumentFromReader(bytes.NewReader([]byte(html)))
-		if err != nil {
+		abs, err1 := markdown.ExtractContent(cr.Content, 100)
+		if err1 != nil {
+
 			res.FailWithMsg("正文解析错误", c)
 			return
 		}
-		htmlText := doc.Text()
-		cr.Abstract = htmlText
-		if len(htmlText) > 200 {
-			// 如果大于200，就取前200
-			cr.Abstract = string([]rune(htmlText)[:200])
-		}
+		cr.Abstract = abs
+
 	}
 
 	// 正文内容图片转存
