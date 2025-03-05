@@ -87,3 +87,27 @@
 [2025-03-04 20:35:12] [36m[info][0m article_look.go:34 Blog-Server/api/article_api.ArticleApi.ArticleLookView 在缓存里面
 [2025-03-04 20:35:14] [36m[info][0m article_look.go:34 Blog-Server/api/article_api.ArticleApi.ArticleLookView 在缓存里面
 [2025-03-04 20:35:15] [36m[info][0m article_look.go:34 Blog-Server/api/article_api.ArticleApi.ArticleLookView 在缓存里面
+[2025-03-04 20:44:16] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-04 20:44:16] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-04 20:44:16] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-04 20:49:48] [36m[info][0m article_look.go:34 Blog-Server/api/article_api.ArticleApi.ArticleLookView 在缓存里面
+[2025-03-04 20:49:53] [36m[info][0m article_look.go:34 Blog-Server/api/article_api.ArticleApi.ArticleLookView 在缓存里面
+[2025-03-04 21:06:06] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-04 21:06:06] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-04 21:06:06] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-04 21:06:55] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-04 21:06:55] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-04 21:06:55] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-04 21:07:01] [36m[info][0m article_model.go:59 Blog-Server/models.(*ArticleModel).BeforeDelete 删除关联评论 0 条
+[2025-03-04 21:07:01] [36m[info][0m article_model.go:60 Blog-Server/models.(*ArticleModel).BeforeDelete 删除关联点赞 0 条
+[2025-03-04 21:07:01] [36m[info][0m article_model.go:61 Blog-Server/models.(*ArticleModel).BeforeDelete 删除关联收藏 0 条
+[2025-03-04 21:07:01] [36m[info][0m article_model.go:62 Blog-Server/models.(*ArticleModel).BeforeDelete 删除关联置顶 0 条
+[2025-03-04 21:07:01] [36m[info][0m article_model.go:63 Blog-Server/models.(*ArticleModel).BeforeDelete 删除关联浏览 0 条
+[2025-03-04 21:09:54] [36m[info][0m article_model.go:59 Blog-Server/models.(*ArticleModel).BeforeDelete 删除关联评论 0 条
+[2025-03-04 21:09:54] [36m[info][0m article_model.go:60 Blog-Server/models.(*ArticleModel).BeforeDelete 删除关联点赞 1 条
+[2025-03-04 21:09:54] [36m[info][0m article_model.go:61 Blog-Server/models.(*ArticleModel).BeforeDelete 删除关联收藏 1 条
+[2025-03-04 21:09:54] [36m[info][0m article_model.go:62 Blog-Server/models.(*ArticleModel).BeforeDelete 删除关联置顶 0 条
+[2025-03-04 21:09:54] [36m[info][0m article_model.go:63 Blog-Server/models.(*ArticleModel).BeforeDelete 删除关联浏览 1 条
+[2025-03-04 23:04:24] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-04 23:04:24] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-04 23:04:24] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
