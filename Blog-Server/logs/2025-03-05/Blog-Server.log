@@ -23,3 +23,17 @@
 [2025-03-05 19:18:33] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
 [2025-03-05 19:18:33] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
 [2025-03-05 19:18:33] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-05 20:12:10] [31m[fatal][0m init_db.go:25 Blog-Server/core.InitDB 数据库连接失败 dial tcp 192.168.179.135:3306: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+[2025-03-05 20:12:45] [31m[fatal][0m init_db.go:25 Blog-Server/core.InitDB 数据库连接失败 dial tcp 192.168.179.135:3306: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+[2025-03-05 20:13:16] [31m[fatal][0m init_db.go:25 Blog-Server/core.InitDB 数据库连接失败 dial tcp 192.168.179.135:3306: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+[2025-03-05 20:43:13] [31m[fatal][0m init_db.go:25 Blog-Server/core.InitDB 数据库连接失败 dial tcp 192.168.179.135:3306: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+[2025-03-05 20:44:08] [31m[fatal][0m init_db.go:25 Blog-Server/core.InitDB 数据库连接失败 dial tcp 192.168.179.135:3306: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+[2025-03-05 20:45:23] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-05 20:45:23] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-05 20:45:30] [31m[panic][0m init_es.go:21 Blog-Server/core.EsConnect es连接失败 health check timeout: Head "http://192.168.179.135:9200": dial tcp 192.168.179.135:9200: connectex: No connection could be made because the target machine actively refused it.: no Elasticsearch node available
+[2025-03-05 20:46:55] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-05 20:46:55] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-05 20:46:55] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-05 21:23:00] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-05 21:23:00] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-05 21:23:00] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
