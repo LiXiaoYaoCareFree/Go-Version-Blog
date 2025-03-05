@@ -6,6 +6,7 @@ import (
 	"Blog-Server/middleware"
 	"Blog-Server/models"
 	"Blog-Server/models/enum"
+	"Blog-Server/service/comment_service"
 	"Blog-Server/utils/jwts"
 	"github.com/gin-gonic/gin"
 )
@@ -36,6 +37,10 @@ func (CommentApi) CommentCreateView(c *gin.Context) {
 	// 去找这个评论的根评论
 	if cr.ParentID != nil {
 		// 有父评论
+		r := comment_service.GetRootComment(*cr.ParentID)
+		if r != nil {
+			model.RootParentID = &r.ID
+		}
 	}
 
 	err = global.DB.Create(&model).Error
