@@ -6,32 +6,6 @@ system:
 log:
   app: Blog-Server
   dir: logs
-es:
-  addr: 192.168.179.135:9200
-  is_https:
-  username:
-  password:
-river:
-  enable: true
-  server_id: 1001
-  flavor: mysql
-  data_dir: ./var
-  source:
-    - schema: blogx
-      tables:
-        - article_models
-  rule:
-    - schema: blogx
-      table: article_models
-      index: article_index
-      type: _doc
-      field:
-        tag_list: tag_list,list
-  bulk_size: 128
-jwt:
-  expire: 3
-  secret: xxx
-  issuer: lingyuan
 db:
   - user: root
     password: root
@@ -47,6 +21,10 @@ db:
     db: blogx
     debug: false
     source: mysql
+jwt:
+  expire: 3
+  secret: xxx
+  issuer: lingyuan
 redis:
   addr: 127.0.0.1:6379
   password: "1234"
@@ -58,12 +36,12 @@ site:
     beian: ""
     mode: 1
   project:
-    title: ""
-    icon: ""
-    webPath: ""
+    title: LiXiaoYaoCareFree
+    icon: /yyy.png
+    webPath: uploads/index.html
   seo:
-    keywords: ""
-    description: ""
+    keywords: LiXiaoYaoCareFree
+    description: LiXiaoYaoCareFree1
   about:
     siteDate: ""
     qq: ""
@@ -80,7 +58,7 @@ site:
     list: []
   article:
     noExamine: true
-    commentLine: 3
+    commentLine: 1
 email:
   domain: smtp.qq.com
   port: 587
@@ -111,9 +89,179 @@ ai:
 upload:
   size: 3
   whiteList:
-  - jpg
-  - jpeg
-  - png
-  - webp
-  - gif
+    - jpg
+    - jpeg
+    - png
+    - webp
+    - gif
   uploadDir: images001
+es:
+  addr: 192.168.179.135:9200
+  username: ""
+  password: ""
+  is_https: false
+river:
+  enable: true
+  server_id: 1001
+  flavor: mysql
+  data_dir: ./var
+  source:
+    - schema: blogx
+      tables:
+        - article_models
+  rule:
+    - schema: blogx
+      table: article_models
+      index: article_index
+      type: _doc
+      parent: ""
+      id: []
+      field:
+        tag_list: tag_list,list
+      tableinfo:
+        schema: blogx
+        name: article_models
+        columns:
+          - name: id
+            type: 1
+            collation: ""
+            rawtype: bigint(20) unsigned
+            isauto: true
+            isunsigned: true
+            enumvalues: []
+            setvalues: []
+          - name: created_at
+            type: 6
+            collation: ""
+            rawtype: datetime(3)
+            isauto: false
+            isunsigned: false
+            enumvalues: []
+            setvalues: []
+          - name: updated_at
+            type: 6
+            collation: ""
+            rawtype: datetime(3)
+            isauto: false
+            isunsigned: false
+            enumvalues: []
+            setvalues: []
+          - name: title
+            type: 5
+            collation: utf8mb4_general_ci
+            rawtype: varchar(32)
+            isauto: false
+            isunsigned: false
+            enumvalues: []
+            setvalues: []
+          - name: abstract
+            type: 5
+            collation: utf8mb4_general_ci
+            rawtype: varchar(256)
+            isauto: false
+            isunsigned: false
+            enumvalues: []
+            setvalues: []
+          - name: content
+            type: 5
+            collation: utf8mb4_general_ci
+            rawtype: longtext
+            isauto: false
+            isunsigned: false
+            enumvalues: []
+            setvalues: []
+          - name: category_id
+            type: 1
+            collation: ""
+            rawtype: bigint(20) unsigned
+            isauto: false
+            isunsigned: true
+            enumvalues: []
+            setvalues: []
+          - name: tag_list
+            type: 5
+            collation: utf8mb4_general_ci
+            rawtype: longtext
+            isauto: false
+            isunsigned: false
+            enumvalues: []
+            setvalues: []
+          - name: cover
+            type: 5
+            collation: utf8mb4_general_ci
+            rawtype: varchar(256)
+            isauto: false
+            isunsigned: false
+            enumvalues: []
+            setvalues: []
+          - name: user_id
+            type: 1
+            collation: ""
+            rawtype: bigint(20) unsigned
+            isauto: false
+            isunsigned: true
+            enumvalues: []
+            setvalues: []
+          - name: look_count
+            type: 1
+            collation: ""
+            rawtype: bigint(20)
+            isauto: false
+            isunsigned: false
+            enumvalues: []
+            setvalues: []
+          - name: digg_count
+            type: 1
+            collation: ""
+            rawtype: bigint(20)
+            isauto: false
+            isunsigned: false
+            enumvalues: []
+            setvalues: []
+          - name: comment_count
+            type: 1
+            collation: ""
+            rawtype: bigint(20)
+            isauto: false
+            isunsigned: false
+            enumvalues: []
+            setvalues: []
+          - name: collect_count
+            type: 1
+            collation: ""
+            rawtype: bigint(20)
+            isauto: false
+            isunsigned: false
+            enumvalues: []
+            setvalues: []
+          - name: open_comment
+            type: 1
+            collation: ""
+            rawtype: tinyint(1)
+            isauto: false
+            isunsigned: false
+            enumvalues: []
+            setvalues: []
+          - name: status
+            type: 1
+            collation: ""
+            rawtype: tinyint(4)
+            isauto: false
+            isunsigned: false
+            enumvalues: []
+            setvalues: []
+        indexes:
+          - name: PRIMARY
+            columns:
+              - id
+            cardinality:
+              - 1
+        pkcolumns:
+          - 0
+        unsignedcolumns:
+          - 0
+          - 6
+          - 9
+      filter: []
+      pipeline: ""
+  bulk_size: 128
