@@ -48,7 +48,7 @@ func (GlobalNotificationApi) CreateView(c *gin.Context) {
 
 type ListRequest struct {
 	common.PageInfo
-	Type int8 `json:"type" binding:"required,oneof=1 2"`
+	Type int8 `form:"type" binding:"required,oneof=1 2"`
 }
 
 type ListResponse struct {
@@ -67,14 +67,21 @@ func (GlobalNotificationApi) ListView(c *gin.Context) {
 	case 1: // 用户可见的
 		// 没被用户删的
 		var ugnmList []models.UserGlobalNotificationModel
-		global.DB.Find(&ugnmList, "user_id = ? and is_delete = ?", claims.UserID, false)
+		global.DB.Find(&ugnmList, "user_id = ?", claims.UserID)
+
 		var msgIDList []uint
 		for _, model := range ugnmList {
-			readMsgMap[model.NotificationID] = model.IsRead
-			msgIDList = append(msgIDList, model.ID)
+			if model.IsDelete {
+				msgIDList = append(msgIDList, model.ID)
+				continue
+			}
+			if model.IsRead {
+				readMsgMap[model.NotificationID] = true
+			}
 		}
-
-		query.Where("id in ?", msgIDList)
+		if len(msgIDList) > 0 {
+			query.Where("id not in ?", msgIDList)
+		}
 
 	case 2:
 		if claims.Role != enum.AdminRole {
@@ -162,7 +169,7 @@ func (GlobalNotificationApi) UserMsgActionView(c *gin.Context) {
 	if ugnm.IsRead {
 		// 如果现在是删除操作，那就更新
 		if model.IsDelete {
-			global.DB.Model(&ugnm).Update("is_read", true)
+			global.DB.Model(&ugnm).Update("is_delete", true)
 		}
 	}
 
