@@ -8,6 +8,7 @@ import (
 	"Blog-Server/models/enum"
 	"Blog-Server/service/comment_service"
 	"Blog-Server/service/redis_service/redis_article"
+	"Blog-Server/service/redis_service/redis_comment"
 	"Blog-Server/utils/jwts"
 	"github.com/gin-gonic/gin"
 )
@@ -46,6 +47,9 @@ func (CommentApi) CommentCreateView(c *gin.Context) {
 		}
 		if len(parentList) > 0 {
 			model.RootParentID = &parentList[len(parentList)-1].ID
+			for _, commentModel := range parentList {
+				redis_comment.SetCacheApply(commentModel.ID, 1)
+			}
 		}
 	}
 
