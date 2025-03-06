@@ -60,3 +60,6 @@
 [2025-03-05 23:53:01] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
 [2025-03-05 23:53:01] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
 [2025-03-05 23:53:01] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-05 23:59:44] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-05 23:59:44] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-05 23:59:44] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
