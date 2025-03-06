@@ -15,4 +15,5 @@ func SiteMsgRouter(r *gin.RouterGroup) {
 	r.GET("site_msg", middleware.AuthMiddleware, middleware.BindQueryMiddleware[site_msg_api.SiteMsgListRequest], app.SiteMsgListView)
 	r.POST("site_msg", middleware.AuthMiddleware, middleware.BindJsonMiddleware[site_msg_api.SiteMsgReadRequest], app.SiteMsgReadView)
 	r.DELETE("site_msg", middleware.AuthMiddleware, middleware.BindJsonMiddleware[site_msg_api.SiteMsgRemoveRequest], app.SiteMsgRemoveView)
+	r.GET("site_msg/user", middleware.AuthMiddleware, app.UserMsgView)
 }
