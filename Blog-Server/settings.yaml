@@ -57,7 +57,7 @@ site:
   indexRight:
     list: []
   article:
-    noExamine: true
+    noExamine: false
     commentLine: 4
 email:
   domain: smtp.qq.com
