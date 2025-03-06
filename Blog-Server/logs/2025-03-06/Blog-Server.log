@@ -70,3 +70,10 @@
 [2025-03-06 20:58:34] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
 [2025-03-06 20:58:34] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
 [2025-03-06 20:58:34] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-06 21:55:51] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-06 21:55:51] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-06 21:55:51] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-06 21:58:23] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-06 21:58:23] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-06 21:58:23] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-06 21:58:40] [36m[info][0m enter.go:72 Blog-Server/flags/flag_user.FlagUser.Create 创建用户成功
