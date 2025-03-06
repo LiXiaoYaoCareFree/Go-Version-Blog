@@ -7,6 +7,7 @@ import (
 	"Blog-Server/models"
 	"Blog-Server/models/enum"
 	"Blog-Server/service/comment_service"
+	"Blog-Server/service/message_service"
 	"Blog-Server/service/redis_service/redis_article"
 	"Blog-Server/service/redis_service/redis_comment"
 	"Blog-Server/utils/jwts"
@@ -58,6 +59,7 @@ func (CommentApi) CommentCreateView(c *gin.Context) {
 		res.FailWithMsg("发布评论失败", c)
 		return
 	}
+	go message_service.InsertCommentMessage(model)
 	redis_article.SetCacheComment(cr.ArticleID, 1)
 	res.OkWithMsg("发布评论成功", c)
 
