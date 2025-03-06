@@ -23,8 +23,10 @@ func FlagDB() {
 		&models.LogModel{},
 		&models.GlobalNotificationModel{},
 		&models.ImageModel{},
-		&models.UserLoginModel{},   // 用户登陆记录表
-		&models.CommentDiggModel{}, // 用户点赞评论表
+		&models.UserLoginModel{},       // 用户登陆记录表
+		&models.CommentDiggModel{},     // 用户点赞评论表
+		&models.MessageModel{},         // 站内信表
+		&models.UserMessageConfModel{}, // 用户消息配置表
 	)
 	if err != nil {
 		logrus.Errorf("数据库迁移失败 %s", err)
