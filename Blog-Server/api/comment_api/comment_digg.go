@@ -5,6 +5,7 @@ import (
 	"Blog-Server/global"
 	"Blog-Server/middleware"
 	"Blog-Server/models"
+	"Blog-Server/service/message_service"
 	"Blog-Server/service/redis_service/redis_comment"
 	"Blog-Server/utils/jwts"
 	"github.com/gin-gonic/gin"
@@ -27,15 +28,18 @@ func (CommentApi) CommentDiggView(c *gin.Context) {
 	err = global.DB.Take(&userDiggComment, "user_id = ? and comment_id = ?", claims.UserID, comment.ID).Error
 	if err != nil {
 		// 点赞
-		err = global.DB.Create(&models.CommentDiggModel{
+		model := models.CommentDiggModel{
 			UserID:    claims.UserID,
 			CommentID: cr.ID,
-		}).Error
+		}
+		err = global.DB.Create(&model).Error
 		if err != nil {
 			res.FailWithMsg("点赞失败", c)
 			return
 		}
 		redis_comment.SetCacheDigg(cr.ID, 1)
+		// 给这个评论的拥有人发消息
+		message_service.InsertDiggCommentMessage(model)
 		res.OkWithMsg("点赞成功", c)
 		return
 	}

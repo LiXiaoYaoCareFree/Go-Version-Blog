@@ -64,3 +64,21 @@ func InsertDiggArticleMessage(model models.ArticleDiggModel) {
 		logrus.Error(err)
 	}
 }
+
+// InsertDiggCommentMessage 点赞评论的消息
+func InsertDiggCommentMessage(model models.CommentDiggModel) {
+	global.DB.Preload("CommentModel.ArticleModel").Preload("UserModel").Take(&model)
+	err := global.DB.Create(&models.MessageModel{
+		Type:               message_type_enum.DiggCommentType,
+		RevUserID:          model.CommentModel.UserID,
+		ActionUserID:       model.UserID,
+		ActionUserNickname: model.UserModel.Nickname,
+		ActionUserAvatar:   model.UserModel.Avatar,
+		Content:            model.CommentModel.Content,
+		ArticleID:          model.CommentModel.ArticleID,
+		ArticleTitle:       model.CommentModel.ArticleModel.Title,
+	}).Error
+	if err != nil {
+		logrus.Error(err)
+	}
+}
