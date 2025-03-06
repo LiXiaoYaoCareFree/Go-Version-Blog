@@ -5,7 +5,6 @@ import (
 	"Blog-Server/flags"
 	"Blog-Server/global"
 	"Blog-Server/models"
-	"encoding/json"
 	"fmt"
 	"time"
 )
@@ -50,9 +49,14 @@ func main() {
 	//	fmt.Println(model.ID)
 	//
 	//}
-	res := GetCommentTreeV4(2)
-	byteData, _ := json.Marshal(res)
-	fmt.Println(string(byteData))
+	//res := GetCommentTreeV4(2)
+	//byteData, _ := json.Marshal(res)
+	//fmt.Println(string(byteData))
+
+	lis := GetParents(10)
+	for _, li := range lis {
+		fmt.Println(li.ID)
+	}
 }
 
 // GetRootComment 获取一个评论的根评论
@@ -67,6 +71,21 @@ func GetRootComment(commentID uint) (model *models.CommentModel) {
 		return &comment
 	}
 	return GetRootComment(*comment.ParentID)
+}
+
+// GetParents 获取一个评论的所有父评论
+func GetParents(commentID uint) (list []models.CommentModel) {
+	var comment models.CommentModel
+	err := global.DB.Take(&comment, commentID).Error
+	if err != nil {
+		return
+	}
+	list = append(list, comment)
+	if comment.ParentID != nil {
+		// 没有父评论了，那么他就是根评论
+		list = append(list, GetParents(*comment.ParentID)...)
+	}
+	return
 }
 
 // 查一个评论下的子评论
