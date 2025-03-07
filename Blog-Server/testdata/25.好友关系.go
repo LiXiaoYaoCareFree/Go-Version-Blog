@@ -24,7 +24,9 @@ func main() {
 	//fmt.Println(focus_service.CalcUserPatchRelationship(4, []uint{1, 2, 3, 5}))
 	//fmt.Println(focus_service.CalcUserPatchRelationship(5, []uint{1, 2, 3, 4}))
 
-	chat_service.ToTextChat(1, 2, "你好")
-	chat_service.ToTextChat(2, 1, "在干嘛")
+	//chat_service.ToTextChat(1, 2, "你好")
+	//chat_service.ToTextChat(2, 1, "在干嘛")
+
+	chat_service.ToImageChat(2, 1, "http://image.fengfengzhidao.com/gvb_1009/20231122175551__1122c.png")
 
 }

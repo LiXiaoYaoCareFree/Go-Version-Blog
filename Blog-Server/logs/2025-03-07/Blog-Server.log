@@ -57,3 +57,4 @@
 [2025-03-07 21:11:32] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
 [2025-03-07 21:11:32] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
 [2025-03-07 21:11:33] [36m[info][0m flag_db.go:39 Blog-Server/flags.FlagDB 数据库迁移成功！
+[2025-03-07 21:12:48] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
