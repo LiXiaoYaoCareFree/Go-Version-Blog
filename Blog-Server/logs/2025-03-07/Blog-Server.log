@@ -34,3 +34,14 @@
 [2025-03-07 10:52:46] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
 [2025-03-07 10:52:46] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
 [2025-03-07 10:52:46] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-07 11:24:11] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-07 11:24:11] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-07 11:24:11] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-07 11:24:11] [36m[info][0m flag_db.go:37 Blog-Server/flags.FlagDB 数据库迁移成功！
+[2025-03-07 11:24:37] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-07 11:28:44] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-07 11:29:03] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-07 11:30:38] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-07 11:32:07] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-07 11:32:07] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-07 11:32:07] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
