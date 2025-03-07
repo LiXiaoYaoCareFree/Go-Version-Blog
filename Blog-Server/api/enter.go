@@ -5,6 +5,7 @@ import (
 	"Blog-Server/api/banner_api"
 	"Blog-Server/api/captcha_api"
 	"Blog-Server/api/comment_api"
+	"Blog-Server/api/focus_api"
 	"Blog-Server/api/global_notification_api"
 	"Blog-Server/api/image_api"
 	"Blog-Server/api/log_api"
@@ -24,6 +25,7 @@ type Api struct {
 	CommentApi            comment_api.CommentApi
 	SiteMsgApi            site_msg_api.SiteMsgApi
 	GlobalNotificationApi global_notification_api.GlobalNotificationApi
+	FocusApi              focus_api.FocusApi
 }
 
 var App = Api{}
