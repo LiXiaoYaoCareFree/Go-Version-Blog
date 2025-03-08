@@ -6,10 +6,15 @@ import (
 	"Blog-Server/global"
 	"Blog-Server/middleware"
 	"Blog-Server/models"
+	"Blog-Server/models/ctype/chat_msg"
+	"Blog-Server/models/enum/chat_msg_type"
+	"Blog-Server/models/enum/relationship_enum"
+	"Blog-Server/service/focus_service"
 	"Blog-Server/utils/jwts"
 	"Blog-Server/utils/sql"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"time"
 )
 
 type SessionListRequest struct {
@@ -22,6 +27,16 @@ type SessionTable struct {
 	MaxDate   string `gorm:"column:maxDate"`
 	Count     int    `gorm:"column:c"`
 	NewChatID uint   `gorm:"column:newChatID"`
+}
+
+type SessionListResponse struct {
+	UserID       uint                       `json:"userID"`
+	UserNickname string                     `json:"userNickname"`
+	UserAvatar   string                     `json:"userAvatar"`
+	Msg          chat_msg.ChatMsg           `json:"msg"`
+	MsgType      chat_msg_type.MsgType      `json:"msgType"`
+	NewMsgDate   time.Time                  `json:"newMsgDate"`
+	Relation     relationship_enum.Relation `json:"relation"` // 好友关系
 }
 
 func (ChatApi) SessionListView(c *gin.Context) {
@@ -67,5 +82,53 @@ func (ChatApi) SessionListView(c *gin.Context) {
 			Group("greatest(send_user_id, rev_user_id)"),
 	).Scan(&count)
 
-	res.OkWithList(_list, count, c)
+	var userIDList []uint
+	var chatIDList []uint
+	for _, table := range _list {
+		chatIDList = append(chatIDList, table.NewChatID)
+		if table.RU == claims.UserID {
+			userIDList = append(userIDList, table.SU)
+		}
+		if table.SU == claims.UserID {
+			userIDList = append(userIDList, table.RU)
+		}
+	}
+
+	var userList []models.UserModel
+	var chatList []models.ChatModel
+	global.DB.Find(&userList, "id in ?", userIDList)
+	global.DB.Find(&chatList, "id in ?", chatIDList)
+
+	var userMap = map[uint]models.UserModel{}
+	for _, model := range userList {
+		userMap[model.ID] = model
+	}
+
+	var chatMap = map[uint]models.ChatModel{}
+	for _, model := range chatList {
+		chatMap[model.ID] = model
+	}
+
+	relationMap := focus_service.CalcUserPatchRelationship(claims.UserID, userIDList)
+
+	var list = make([]SessionListResponse, 0)
+	for _, table := range _list {
+		item := SessionListResponse{}
+		if table.RU == claims.UserID {
+			item.UserID = table.SU
+		}
+		if table.SU == claims.UserID {
+			item.UserID = table.RU
+		}
+
+		item.UserNickname = userMap[item.UserID].Nickname
+		item.UserAvatar = userMap[item.UserID].Avatar
+		item.Msg = chatMap[table.NewChatID].Msg
+		item.MsgType = chatMap[table.NewChatID].MsgType
+		item.NewMsgDate = chatMap[table.NewChatID].CreatedAt
+		item.Relation = relationMap[item.UserID]
+		list = append(list, item)
+	}
+
+	res.OkWithList(list, count, c)
 }
