@@ -1,0 +1,8 @@
+[2025-03-08 12:31:27] [31m[fatal][0m init_db.go:25 Blog-Server/core.InitDB 数据库连接失败 dial tcp 192.168.179.135:3306: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+[2025-03-08 12:49:53] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-08 12:49:53] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-08 12:49:53] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-08 12:49:54] [36m[info][0m flag_db.go:39 Blog-Server/flags.FlagDB 数据库迁移成功！
+[2025-03-08 13:54:56] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-08 13:54:56] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-08 13:54:56] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
