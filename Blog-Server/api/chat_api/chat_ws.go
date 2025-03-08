@@ -6,7 +6,10 @@ import (
 	"Blog-Server/models"
 	"Blog-Server/models/ctype/chat_msg"
 	"Blog-Server/models/enum/chat_msg_type"
+	"Blog-Server/models/enum/relationship_enum"
+	"Blog-Server/service/focus_service"
 	"Blog-Server/utils/jwts"
+	"Blog-Server/utils/xss"
 	"encoding/json"
 	"fmt"
 	"github.com/gin-gonic/gin"
@@ -87,6 +90,48 @@ func (ChatApi) ChatView(c *gin.Context) {
 		}
 
 		// 具体的消息类型做处理
+		switch req.MsgType {
+		case chat_msg_type.TextMsgType:
+			if req.Msg.TextMsg == nil || req.Msg.TextMsg.Content == "" {
+				res.SendConnFailWithMsg("文本消息内容为空", conn)
+				continue
+			}
+		case chat_msg_type.ImageMsgType:
+			if req.Msg.ImageMsg == nil || req.Msg.ImageMsg.Src == "" {
+				res.SendConnFailWithMsg("图片消息内容为空", conn)
+				continue
+			}
+		case chat_msg_type.MarkdownMsgType:
+			if req.Msg.MarkdownMsg == nil || req.Msg.MarkdownMsg.Content == "" {
+				res.SendConnFailWithMsg("markdown消息内容为空", conn)
+				continue
+			}
+			// 对markdown消息做过滤
+			req.Msg.MarkdownMsg.Content = xss.XSSFilter(req.Msg.MarkdownMsg.Content)
+		}
+
+		// 判断你与对方的好友关系
+		// 好友就能每天聊
+		// 已关注和粉丝 如果对方没有回复你，那么每天只能聊一次  对方如果没有回你，那么你只能发三条消息
+		// 陌生人，如果对方开了陌生人私信，那么就能聊
+		relation := focus_service.CalcUserRelationship(userID, req.RevUserID)
+		switch relation {
+		case relationship_enum.RelationStranger: // 陌生人
+			var revUserMsgConf models.UserMessageConfModel
+			err = global.DB.Take(&revUserMsgConf, "user_id = ?", revUser.ID).Error
+			if err != nil {
+				res.SendConnFailWithMsg("接收人隐私设置不存在", conn)
+				continue
+			}
+			if !revUserMsgConf.OpenPrivateChat {
+				res.SendConnFailWithMsg("对方未开始陌生人私聊", conn)
+				continue
+			}
+		case relationship_enum.RelationFocus: // 已关注
+
+		case relationship_enum.RelationFans: // 粉丝
+
+		}
 
 		// 先落库
 		model := models.ChatModel{
