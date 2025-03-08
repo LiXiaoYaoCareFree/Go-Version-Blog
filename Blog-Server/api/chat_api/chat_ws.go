@@ -135,7 +135,7 @@ func (ChatApi) ChatView(c *gin.Context) {
 		case relationship_enum.RelationFocus, relationship_enum.RelationFans: // 已关注
 			// 今天对方如果没有回复你，那么你就只能发一条
 			var chatList []models.ChatModel
-			global.DB.Find(&chatList, "date(created_at) = date (now()) and (send_user_id = ? and  rev_user_id = ?) or (send_user_id = ? and  rev_user_id = ?)",
+			global.DB.Find(&chatList, "date(created_at) = date (now()) and ( (send_user_id = ? and  rev_user_id = ?) or (send_user_id = ? and  rev_user_id = ?))",
 				userID, req.RevUserID, req.RevUserID, userID)
 
 			// 我发的  对方发的
