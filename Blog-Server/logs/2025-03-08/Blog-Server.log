@@ -120,3 +120,9 @@
 [2025-03-08 23:38:39] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
 [2025-03-08 23:38:39] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
 [2025-03-08 23:38:39] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-08 23:54:14] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-08 23:54:14] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-08 23:54:14] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-08 23:54:26] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-08 23:54:26] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-08 23:54:26] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
