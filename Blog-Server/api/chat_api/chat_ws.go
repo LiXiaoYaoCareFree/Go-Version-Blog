@@ -108,6 +108,9 @@ func (ChatApi) ChatView(c *gin.Context) {
 			}
 			// 对markdown消息做过滤
 			req.Msg.MarkdownMsg.Content = xss.XSSFilter(req.Msg.MarkdownMsg.Content)
+		default:
+			res.SendConnFailWithMsg("不支持的消息类型", conn)
+			continue
 		}
 
 		// 判断你与对方的好友关系
@@ -115,6 +118,8 @@ func (ChatApi) ChatView(c *gin.Context) {
 		// 已关注和粉丝 如果对方没有回复你，那么每天只能聊一次  对方如果没有回你，那么你只能发三条消息
 		// 陌生人，如果对方开了陌生人私信，那么就能聊
 		relation := focus_service.CalcUserRelationship(userID, req.RevUserID)
+
+		fmt.Printf("用户%d %d的好友关系是：%d\n", userID, req.RevUserID, relation)
 		switch relation {
 		case relationship_enum.RelationStranger: // 陌生人
 			var revUserMsgConf models.UserMessageConfModel
@@ -127,9 +132,27 @@ func (ChatApi) ChatView(c *gin.Context) {
 				res.SendConnFailWithMsg("对方未开始陌生人私聊", conn)
 				continue
 			}
-		case relationship_enum.RelationFocus: // 已关注
+		case relationship_enum.RelationFocus, relationship_enum.RelationFans: // 已关注
+			// 今天对方如果没有回复你，那么你就只能发一条
+			var chatList []models.ChatModel
+			global.DB.Find(&chatList, "date(created_at) = date (now()) and (send_user_id = ? and  rev_user_id = ?) or (send_user_id = ? and  rev_user_id = ?)",
+				userID, req.RevUserID, req.RevUserID, userID)
 
-		case relationship_enum.RelationFans: // 粉丝
+			// 我发的  对方发的
+			var sendChatCount, revChatCount int
+			for _, model := range chatList {
+				if model.SendUserID == userID {
+					sendChatCount++
+				}
+				if model.RevUserID == userID {
+					revChatCount++
+				}
+			}
+			fmt.Println(sendChatCount, revChatCount)
+			if sendChatCount > 1 && revChatCount == 0 {
+				res.SendConnFailWithMsg("对方未回复的情况下，当天只能发送一条消息", conn)
+				continue
+			}
 
 		}
 
