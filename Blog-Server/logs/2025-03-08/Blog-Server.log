@@ -45,3 +45,15 @@
 [2025-03-08 18:12:00] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
 [2025-03-08 18:12:00] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
 [2025-03-08 18:12:00] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-08 18:46:06] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-08 18:46:06] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-08 18:46:06] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-08 19:56:52] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-08 19:56:52] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-08 19:56:52] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-08 20:19:59] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-08 20:19:59] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-08 20:19:59] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-08 20:22:50] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-08 20:22:50] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-08 20:22:50] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功

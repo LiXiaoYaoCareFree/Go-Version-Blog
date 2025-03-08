@@ -7,7 +7,7 @@ log:
   app: Blog-Server
   dir: logs
 jwt:
-  expire: 3
+  expire: 240
   secret: xxx
   issuer: lingyuan
 db:
