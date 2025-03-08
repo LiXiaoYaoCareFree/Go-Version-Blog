@@ -37,6 +37,6 @@ systemctl restart docker
 
 SET NAMES utf8mb4;
 
-
+git commit --amend -m "新的提交信息"
 
 ```
