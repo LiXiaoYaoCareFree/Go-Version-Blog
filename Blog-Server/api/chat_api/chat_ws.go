@@ -149,7 +149,7 @@ func (ChatApi) ChatView(c *gin.Context) {
 				}
 			}
 			fmt.Println(sendChatCount, revChatCount)
-			if sendChatCount > 1 && revChatCount == 0 {
+			if sendChatCount == 1 && revChatCount == 0 {
 				res.SendConnFailWithMsg("对方未回复的情况下，当天只能发送一条消息", conn)
 				continue
 			}
@@ -180,6 +180,7 @@ func (ChatApi) ChatView(c *gin.Context) {
 		}
 		// 发给对方的
 		res.SendWsMsg(OnlineMap, req.RevUserID, item)
+
 		// 发给自己的
 		item.IsMe = true
 		res.SendConnOkWithData(item, conn)

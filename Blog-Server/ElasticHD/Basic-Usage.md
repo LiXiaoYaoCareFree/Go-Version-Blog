@@ -39,4 +39,8 @@ SET NAMES utf8mb4;
 
 git commit --amend -m "新的提交信息"
 
+修改mysql服务的时区
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
+
 ```
