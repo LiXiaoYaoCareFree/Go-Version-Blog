@@ -122,3 +122,6 @@
 [2025-03-09 17:51:27] [36m[info][0m article_model.go:64 Blog-Server/models.(*ArticleModel).BeforeDelete 删除关联置顶 0 条
 [2025-03-09 17:51:27] [36m[info][0m article_model.go:65 Blog-Server/models.(*ArticleModel).BeforeDelete 删除关联浏览 0 条
 [2025-03-09 17:51:27] [36m[info][0m article_model.go:100 Blog-Server/models.(*ArticleModel).AfterDelete 删除全文记录 1
+[2025-03-09 19:13:50] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-09 19:13:50] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-09 19:13:50] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
