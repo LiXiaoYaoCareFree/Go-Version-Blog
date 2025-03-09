@@ -100,9 +100,9 @@ es:
   username: ""
   password: ""
   is_https: false
-  enable: false
+  enable: true
 river:
-  enable: false
+  enable: true
   server_id: 1001
   flavor: mysql
   data_dir: ./var
@@ -115,7 +115,5 @@ river:
     table: article_models
     index: article_index
     type: _doc
-    parent: ""
-    id: []
     field:
       tag_list: tag_list,list
