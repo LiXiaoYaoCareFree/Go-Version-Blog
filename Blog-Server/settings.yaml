@@ -100,8 +100,9 @@ es:
   username: ""
   password: ""
   is_https: false
+  enable: false
 river:
-  enable: true
+  enable: false
   server_id: 1001
   flavor: mysql
   data_dir: ./var

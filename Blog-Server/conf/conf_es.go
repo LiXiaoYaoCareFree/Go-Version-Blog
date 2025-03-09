@@ -8,6 +8,7 @@ type ES struct {
 	Username string `yaml:"username"`
 	Password string `yaml:"password"`
 	IsHttps  bool   `yaml:"is_https"`
+	Enable   bool   `yaml:"enable"`
 }
 
 func (e ES) Url() string {
