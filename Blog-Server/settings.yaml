@@ -111,9 +111,11 @@ river:
     tables:
     - article_models
   rule:
-  - schema: blogx
-    table: article_models
-    index: article_index
-    type: _doc
-    field:
-      tag_list: tag_list,list
+    - schema: blogx
+      table: article_models
+      index: article_index
+      type: _doc
+      field:
+        tag_list: tag_list,list
+      filter: []
+  bulk_size: 128
