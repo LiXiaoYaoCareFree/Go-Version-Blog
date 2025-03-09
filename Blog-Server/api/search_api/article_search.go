@@ -7,6 +7,7 @@ import (
 	"Blog-Server/middleware"
 	"Blog-Server/models"
 	"Blog-Server/utils/jwts"
+	"Blog-Server/utils/sql"
 	"context"
 	"encoding/json"
 	"fmt"
@@ -17,7 +18,8 @@ import (
 
 type ArticleSearchRequest struct {
 	common.PageInfo
-	Type int8 `form:"type"` // 0 猜你喜欢  1 最新发布  2最多回复 3最多点赞 4最多收藏
+	Tag  string `form:"tag"`
+	Type int8   `form:"type"` // 0 猜你喜欢  1 最新发布  2最多回复 3最多点赞 4最多收藏
 }
 
 type ArticleBaseInfo struct {
@@ -58,7 +60,11 @@ func (SearchApi) ArticleSearchView(c *gin.Context) {
 			elastic.NewMatchQuery("content", cr.Key),
 		)
 	}
-
+	if cr.Tag != "" {
+		query.Must(
+			elastic.NewTermQuery("tag_list", cr.Tag),
+		)
+	}
 	// 只能查发布的文章
 	query.Must(elastic.NewTermQuery("status", 3))
 
@@ -103,9 +109,6 @@ func (SearchApi) ArticleSearchView(c *gin.Context) {
 	var searchArticleMap = map[uint]ArticleBaseInfo{}
 	var articleIDList []uint
 	for _, hit := range result.Hits.Hits {
-		fmt.Println(string(hit.Source))
-		fmt.Println(hit.Highlight["title"])
-		fmt.Println(hit.Highlight["abstract"])
 		var art ArticleBaseInfo
 		err = json.Unmarshal(hit.Source, &art)
 		if err != nil {
@@ -125,8 +128,9 @@ func (SearchApi) ArticleSearchView(c *gin.Context) {
 	where := global.DB.Where("id in ?", articleIDList)
 
 	_list, _, _ := common.ListQuery(models.ArticleModel{}, common.Options{
-		Where:    where,
-		Preloads: []string{"CategoryModel", "UserModel"},
+		Where:        where,
+		Preloads:     []string{"CategoryModel", "UserModel"},
+		DefaultOrder: sql.ConvertSliceOrderSql(articleIDList),
 	})
 
 	var list = make([]ArticleListResponse, 0)
