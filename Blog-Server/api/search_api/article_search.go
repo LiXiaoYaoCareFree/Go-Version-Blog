@@ -6,6 +6,7 @@ import (
 	"Blog-Server/global"
 	"Blog-Server/middleware"
 	"Blog-Server/models"
+	"Blog-Server/models/enum"
 	"Blog-Server/utils/jwts"
 	"Blog-Server/utils/sql"
 	"context"
@@ -69,6 +70,19 @@ func (SearchApi) ArticleSearchView(c *gin.Context) {
 	query.Must(elastic.NewTermQuery("status", 3))
 
 	// 把管理员置顶的文章查出来
+	var userIDList []uint
+	var topArticleIDList []uint
+	global.DB.Model(models.UserModel{}).Where("role = ?", enum.AdminRole).Select("id").Scan(&userIDList)
+	global.DB.Model(models.UserTopArticleModel{}).Where("user_id in ?", userIDList).Select("article_id").Scan(&topArticleIDList)
+	var articleTopMap = map[uint]bool{}
+	if len(topArticleIDList) > 0 {
+		var topArticleIDListAny []interface{}
+		for _, u := range topArticleIDList {
+			topArticleIDListAny = append(topArticleIDListAny, u)
+			articleTopMap[u] = true
+		}
+		query.Should(elastic.NewTermsQuery("id", topArticleIDListAny...))
+	}
 
 	claims, err := jwts.ParseTokenByGin(c)
 	if err == nil && claims != nil {
@@ -82,9 +96,11 @@ func (SearchApi) ArticleSearchView(c *gin.Context) {
 		}
 		if len(userConf.LikeTags) > 0 {
 			tagQuery := elastic.NewBoolQuery()
+			var tagAnyList []interface{}
 			for _, tag := range userConf.LikeTags {
-				tagQuery.Should(elastic.NewTermQuery("tag_list", tag))
+				tagAnyList = append(tagAnyList, tag)
 			}
+			tagQuery.Should(elastic.NewTermsQuery("tag_list", tagAnyList...))
 			query.Must(tagQuery)
 		}
 	}
@@ -137,7 +153,7 @@ func (SearchApi) ArticleSearchView(c *gin.Context) {
 	for _, model := range _list {
 		item := ArticleListResponse{
 			ArticleModel: model,
-			AdminTop:     true,
+			AdminTop:     articleTopMap[model.ID],
 			UserNickname: model.UserModel.Nickname,
 			UserAvatar:   model.UserModel.Avatar,
 		}
