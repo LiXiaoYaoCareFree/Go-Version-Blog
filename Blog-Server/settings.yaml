@@ -100,7 +100,7 @@ es:
   username: ""
   password: ""
   is_https: false
-  enable: true
+  enable: false
 river:
   enable: true
   server_id: 1001
