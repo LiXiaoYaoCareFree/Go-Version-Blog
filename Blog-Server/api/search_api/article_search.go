@@ -66,8 +66,11 @@ func (SearchApi) ArticleSearchView(c *gin.Context) {
 			elastic.NewTermQuery("tag_list", cr.Tag),
 		)
 	}
+
 	// 只能查发布的文章
 	query.Must(elastic.NewTermQuery("status", 3))
+
+	var articleIDList []uint
 
 	// 把管理员置顶的文章查出来
 	var userIDList []uint
@@ -80,28 +83,32 @@ func (SearchApi) ArticleSearchView(c *gin.Context) {
 		for _, u := range topArticleIDList {
 			topArticleIDListAny = append(topArticleIDListAny, u)
 			articleTopMap[u] = true
+			articleIDList = append(articleIDList, u)
 		}
-		query.Should(elastic.NewTermsQuery("id", topArticleIDListAny...))
+		query.Should(elastic.NewTermsQuery("id", topArticleIDListAny...).Boost(10))
 	}
 
-	claims, err := jwts.ParseTokenByGin(c)
-	if err == nil && claims != nil {
-		// 用户登录了
-		// 查用户感兴趣的分类
-		var userConf models.UserConfModel
-		err = global.DB.Take(&userConf, "user_id = ?", claims.UserID).Error
-		if err != nil {
-			res.FailWithMsg("用户配置不存在", c)
-			return
-		}
-		if len(userConf.LikeTags) > 0 {
-			tagQuery := elastic.NewBoolQuery()
-			var tagAnyList []interface{}
-			for _, tag := range userConf.LikeTags {
-				tagAnyList = append(tagAnyList, tag)
+	if cr.Type == 0 {
+		// 只有猜你喜欢，才会把用户喜欢的标签带入查询
+		claims, err := jwts.ParseTokenByGin(c)
+		if err == nil && claims != nil {
+			// 用户登录了
+			// 查用户感兴趣的分类
+			var userConf models.UserConfModel
+			err = global.DB.Take(&userConf, "user_id = ?", claims.UserID).Error
+			if err != nil {
+				res.FailWithMsg("用户配置不存在", c)
+				return
 			}
-			tagQuery.Should(elastic.NewTermsQuery("tag_list", tagAnyList...))
-			query.Must(tagQuery)
+			if len(userConf.LikeTags) > 0 {
+				tagQuery := elastic.NewBoolQuery()
+				var tagAnyList []interface{}
+				for _, tag := range userConf.LikeTags {
+					tagAnyList = append(tagAnyList, tag)
+				}
+				tagQuery.Should(elastic.NewTermsQuery("tag_list", tagAnyList...))
+				query.Must(tagQuery)
+			}
 		}
 	}
 
@@ -118,18 +125,26 @@ func (SearchApi) ArticleSearchView(c *gin.Context) {
 		Sort(sortKey, false).
 		Do(context.Background())
 	if err != nil {
-		fmt.Println(err)
+		source, _ := query.Source()
+		byteData, _ := json.Marshal(source)
+		logrus.Errorf("查询失败 %s \n %s", err, string(byteData))
+		res.FailWithMsg("查询失败", c)
 		return
 	}
+
 	count := result.Hits.TotalHits.Value
 	var searchArticleMap = map[uint]ArticleBaseInfo{}
-	var articleIDList []uint
+
 	for _, hit := range result.Hits.Hits {
+
 		var art ArticleBaseInfo
 		err = json.Unmarshal(hit.Source, &art)
 		if err != nil {
 			logrus.Warnf("解析失败 %s  %s", err, string(hit.Source))
 			continue
+		}
+		if hit.Score != nil {
+			fmt.Println(*hit.Score, art.Title, art.ID)
 		}
 		if len(hit.Highlight["title"]) > 0 {
 			art.Title = hit.Highlight["title"][0]
@@ -137,6 +152,7 @@ func (SearchApi) ArticleSearchView(c *gin.Context) {
 		if len(hit.Highlight["abstract"]) > 0 {
 			art.Abstract = hit.Highlight["abstract"][0]
 		}
+
 		searchArticleMap[art.ID] = art
 		articleIDList = append(articleIDList, art.ID)
 	}
