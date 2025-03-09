@@ -100,9 +100,9 @@ es:
   username: ""
   password: ""
   is_https: false
-  enable: false
+  enable: true
 river:
-  enable: false
+  enable: true
   server_id: 1001
   flavor: mysql
   data_dir: ./var
@@ -110,6 +110,7 @@ river:
   - schema: blogx
     tables:
     - article_models
+    - text_models
   rule:
   - schema: blogx
     table: article_models
@@ -117,4 +118,8 @@ river:
     type: _doc
     field:
       tag_list: tag_list,list
+  - schema: blogx
+    table: text_models
+    index: text_index
+    type: _doc
   bulk_size: 128
