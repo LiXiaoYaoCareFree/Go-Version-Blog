@@ -72,7 +72,7 @@ func main() {
 	core.InitLogrus()
 	global.ESClient = core.EsConnect()
 	//create()
-	//list()
+	list()
 	//DocDelete()
-	update()
+	//update()
 }

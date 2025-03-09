@@ -21,7 +21,7 @@ docker compose up -d
 ssh -L 9800:localhost:9800 root@192.168.179.135:22
 cd /opt/BlogX/Blog-Server/Blog-Server/ElasticHD/
 ./ElasticHD -p 127.0.0.1:9800 
-
+DELETE  http://192.168.179.135:9200/article_models/_doc/2
 
 进入 MySQL 容器
 docker exec -it mysql-master bash

@@ -1,3 +1,56 @@
 [2025-03-09 11:47:20] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
 [2025-03-09 11:47:20] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
 [2025-03-09 11:47:20] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-09 11:54:46] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-09 11:54:46] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-09 11:54:46] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-09 11:58:17] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-09 11:58:17] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-09 11:58:17] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-09 11:58:17] [36m[info][0m index.go:41 Blog-Server/service/es_service.DeleteIndex article_index 索引删除成功
+[2025-03-09 11:58:18] [36m[info][0m index.go:25 Blog-Server/service/es_service.CreateIndex article_index 索引创建成功
+[2025-03-09 11:58:31] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-09 11:58:31] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-09 11:58:31] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-09 12:00:24] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-09 12:00:24] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-09 12:00:24] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-09 12:00:24] [36m[info][0m index.go:41 Blog-Server/service/es_service.DeleteIndex article_index 索引删除成功
+[2025-03-09 12:00:24] [36m[info][0m index.go:25 Blog-Server/service/es_service.CreateIndex article_index 索引创建成功
+[2025-03-09 12:01:59] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-09 12:01:59] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-09 12:01:59] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-09 12:09:03] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-09 12:09:03] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-09 12:09:03] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-09 12:10:12] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-09 12:10:12] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-09 12:10:12] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-09 12:23:36] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-09 12:23:36] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-09 12:23:36] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-09 12:23:36] [36m[info][0m flag_db.go:39 Blog-Server/flags.FlagDB 数据库迁移成功！
+[2025-03-09 12:24:00] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-09 12:24:00] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-09 12:24:00] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-09 12:38:15] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-09 12:38:15] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-09 12:38:15] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-09 12:45:17] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-09 12:45:17] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-09 12:45:17] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-09 12:45:17] [36m[info][0m index.go:41 Blog-Server/service/es_service.DeleteIndex article_index 索引删除成功
+[2025-03-09 12:45:17] [36m[info][0m index.go:25 Blog-Server/service/es_service.CreateIndex article_index 索引创建成功
+[2025-03-09 12:45:46] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-09 12:45:46] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-09 12:45:46] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-09 12:45:46] [36m[info][0m index.go:41 Blog-Server/service/es_service.DeleteIndex article_index 索引删除成功
+[2025-03-09 12:45:47] [36m[info][0m index.go:25 Blog-Server/service/es_service.CreateIndex article_index 索引创建成功
+[2025-03-09 12:46:04] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-09 12:46:04] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-09 12:46:04] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-09 12:50:24] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-09 12:54:15] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-09 12:54:15] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-09 12:54:15] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-09 12:59:54] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
