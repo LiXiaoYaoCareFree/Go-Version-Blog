@@ -91,3 +91,6 @@
 [2025-03-09 14:58:28] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
 [2025-03-09 14:58:28] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
 [2025-03-09 14:58:28] [36m[info][0m init_mysql_es.go:12 Blog-Server/core.InitMysqlES 关闭mysql同步操作
+[2025-03-09 17:10:20] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-09 17:10:20] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-09 17:10:20] [36m[info][0m flag_db.go:40 Blog-Server/flags.FlagDB 数据库迁移成功！
