@@ -42,5 +42,11 @@ git commit --amend -m "新的提交信息"
 修改mysql服务的时区
 ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
+运行ollama
+/opt/BlogX/Blog-Server/Blog-Server/bin
+
+docker exec -it ollama-container /bin/bash
+
+docker run -d -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
 
 ```
