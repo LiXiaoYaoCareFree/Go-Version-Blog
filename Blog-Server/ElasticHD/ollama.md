@@ -14,7 +14,7 @@ docker run -d -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
 接下来我们可以尝试进入容器，通过容器内的ollama命令运行llama3.2:3b模型。
 
 命令如下：
-
+docker start ollama
 docker exec -it ollama bash
 ollama run llama3.2:3b
 Ollama运行大模型服务
@@ -76,3 +76,6 @@ ollama stop llama3.2:3b
 删除模型：
 
 ollama rm llama3.2:3b
+
+
+ssh -L 11434:127.0.0.1:11434 root@192.168.179.135
