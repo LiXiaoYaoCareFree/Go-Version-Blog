@@ -1,14 +1,13 @@
 package ai_api
 
 import (
-	"Blog-Server/common/res"
 	"Blog-Server/global"
 	"Blog-Server/middleware"
 	"Blog-Server/models"
 	"Blog-Server/service/ai_service"
 	"context"
 	"encoding/json"
-	"fmt"
+
 	"github.com/gin-gonic/gin"
 	"github.com/olivere/elastic/v7"
 	"github.com/sirupsen/logrus"
@@ -16,13 +15,13 @@ import (
 )
 
 type ArticleAiRequest struct {
-	Content string `json:"content" binding:"required"`
+	Content string `form:"content" binding:"required"`
 }
 
 func (AiApi) ArticleAiView(c *gin.Context) {
 	cr := middleware.GetBind[ArticleAiRequest](c)
 	if !global.Config.Ai.Enable {
-		res.FailWithMsg("站点未启用ai功能", c)
+		res.SSEFail("站点未启用ai功能", c)
 		return
 	}
 	// 查这个内容关联的文章列表
@@ -44,23 +43,22 @@ func (AiApi) ArticleAiView(c *gin.Context) {
 		source, _ := query.Source()
 		byteData, _ := json.Marshal(source)
 		logrus.Errorf("查询失败 %s \n %s", err, string(byteData))
-		res.FailWithMsg("查询失败", c)
+		res.SSEFail("查询失败", c)
 		return
 	}
 	var list []string
 	for _, hit := range result.Hits.Hits {
-		fmt.Println(*hit.Score, string(hit.Source))
+
 		list = append(list, string(hit.Source))
 	}
 	content := "[" + strings.Join(list, ",") + "]"
 	msgChan, err := ai_service.ChatStream(cr.Content, content)
 	if err != nil {
-		res.FailWithMsg("ai分析失败", c)
+		res.SSEFail("ai分析失败", c)
 		return
 	}
 	for s := range msgChan {
-		fmt.Printf(s)
+		res.SSEOk(s, c)
 	}
 
-	res.OkWithData(list, c)
 }
