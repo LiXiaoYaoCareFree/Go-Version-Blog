@@ -4,56 +4,13 @@ import (
 	"Blog-Server/core"
 	"Blog-Server/flags"
 	"Blog-Server/global"
+	"Blog-Server/service/ai_service"
 	"bufio"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"net/http"
 	"strings"
 )
-
-func chat() {
-	url := "https://api.chatanywhere.tech/v1/chat/completions"
-	method := "POST"
-
-	payload := strings.NewReader(`{
-    "model": "gpt-3.5-turbo",
-    "messages": [
-      {
-        "role": "system",
-        "content": "你是一个叫LiXiaoYaoCareFree的人工智能助手"
-      },
-      {
-        "role": "user",
-        "content": "你好，你是谁?"
-      }
-    ]
-  }`)
-
-	client := &http.Client{}
-	req, err := http.NewRequest(method, url, payload)
-
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", global.Config.Ai.SecretKey))
-	req.Header.Add("Content-Type", "application/json")
-
-	res, err := client.Do(req)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	defer res.Body.Close()
-
-	body, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	fmt.Println(string(body))
-}
 
 type Choice struct {
 	Index int `json:"index"`
@@ -138,6 +95,7 @@ func main() {
 	global.Config = core.ReadConf()
 	core.InitLogrus()
 
-	chatStream()
+	msg, err := ai_service.Chat("你好")
+	fmt.Println(msg, err)
 
 }
