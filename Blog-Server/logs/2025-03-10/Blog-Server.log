@@ -1,0 +1,8 @@
+[2025-03-10 11:53:06] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-10 11:53:06] [31m[fatal][0m init_redis.go:19 Blog-Server/core.InitRedis redis连接失败 dial tcp 127.0.0.1:6379: connectex: No connection could be made because the target machine actively refused it.
+[2025-03-10 11:53:42] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-10 11:53:42] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-10 11:53:42] [36m[info][0m init_mysql_es.go:16 Blog-Server/core.InitMysqlES 未配置es，关闭mysql数据同步
+[2025-03-10 12:01:19] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-10 12:01:19] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-10 12:01:19] [36m[info][0m init_mysql_es.go:16 Blog-Server/core.InitMysqlES 未配置es，关闭mysql数据同步

@@ -3,6 +3,7 @@ package ai_service
 import (
 	"Blog-Server/global"
 	"bytes"
+	_ "embed"
 	"encoding/json"
 	"fmt"
 	"github.com/sirupsen/logrus"
@@ -67,13 +68,16 @@ func BaseRequest(r Request) (res *http.Response, err error) {
 	return
 }
 
+//go:embed chat.prompt
+var chatPrompt string
+
 func Chat(content string) (msg string, err error) {
 	r := Request{
 		Model: "gpt-3.5-turbo",
 		Messages: []Message{
 			{
 				Role:    "system",
-				Content: "你是一个叫枫枫知道的人工智能助手",
+				Content: chatPrompt,
 			},
 			{
 				Role:    "user",
@@ -95,6 +99,10 @@ func Chat(content string) (msg string, err error) {
 		logrus.Errorf("解析失败 %s %s", err, string(body))
 		return
 	}
-	msg = response.Choices[0].Message.Content
+	if len(response.Choices) > 0 {
+		msg = response.Choices[0].Message.Content
+		return
+	}
+	logrus.Errorf("未获取到数据 %s ", string(body))
 	return
 }
