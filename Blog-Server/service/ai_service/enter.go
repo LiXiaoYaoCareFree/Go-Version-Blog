@@ -52,21 +52,8 @@ type ChatResponse struct {
 
 const baseUrl = "https://api.chatanywhere.tech/v1/chat/completions"
 
-func Chat(content string) (msg string, err error) {
+func BaseRequest(r Request) (res *http.Response, err error) {
 	method := "POST"
-	r := Request{
-		Model: "gpt-3.5-turbo",
-		Messages: []Message{
-			{
-				Role:    "system",
-				Content: "你是一个叫枫枫知LiXiaoYaoCareFree的人工智能助手",
-			},
-			{
-				Role:    "user",
-				Content: content,
-			},
-		},
-	}
 	byteData, _ := json.Marshal(r)
 	req, err := http.NewRequest(method, baseUrl, bytes.NewBuffer(byteData))
 	if err != nil {
@@ -76,12 +63,30 @@ func Chat(content string) (msg string, err error) {
 	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", global.Config.Ai.SecretKey))
 	req.Header.Add("Content-Type", "application/json")
 
-	res, err := http.DefaultClient.Do(req)
+	res, err = http.DefaultClient.Do(req)
+	return
+}
+
+func Chat(content string) (msg string, err error) {
+	r := Request{
+		Model: "gpt-3.5-turbo",
+		Messages: []Message{
+			{
+				Role:    "system",
+				Content: "你是一个叫枫枫知道的人工智能助手",
+			},
+			{
+				Role:    "user",
+				Content: content,
+			},
+		},
+	}
+	res, err := BaseRequest(r)
+
 	if err != nil {
-		logrus.Errorf("请求失败 %s", err)
+
 		return
 	}
-	defer res.Body.Close()
 
 	body, _ := io.ReadAll(res.Body)
 	var response ChatResponse
