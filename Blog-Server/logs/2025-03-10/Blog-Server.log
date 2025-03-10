@@ -30,3 +30,10 @@
 [2025-03-10 13:47:07] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
 [2025-03-10 13:47:07] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
 [2025-03-10 13:47:07] [36m[info][0m init_es.go:24 Blog-Server/core.EsConnect es连接成功
+[2025-03-10 13:55:27] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-10 13:55:27] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-10 13:55:27] [36m[info][0m init_es.go:25 Blog-Server/core.EsConnect es连接成功
+[2025-03-10 13:56:26] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-10 13:56:26] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-10 13:56:26] [36m[info][0m init_es.go:13 Blog-Server/core.EsConnect 未启用es连接
+[2025-03-10 13:56:26] [36m[info][0m init_mysql_es.go:16 Blog-Server/core.InitMysqlES 未配置es，关闭mysql数据同步

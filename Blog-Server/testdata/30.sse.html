@@ -21,7 +21,7 @@
         const url = `http://127.0.0.1:8080/api/ai/article?content=${content}&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjEsInVzZXJuYW1lIjoiTExZIiwicm9sZSI6MSwiZXhwIjoxNzQyNDQ3MDQ5LCJpc3MiOiJsaW5neXVhbiJ9.EsMAQ37ME0Jr1Xtn05Q6uA4hhYOm6q4UMTRE7GLzrMQ`
 
         const eventSource=new EventSource(url);
-
+        inner.innerText = ""
         eventSource.onmessage = (e) => {
             const message = JSON.parse(e.data);
             //this.messages.push(message);
