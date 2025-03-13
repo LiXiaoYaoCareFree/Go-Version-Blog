@@ -6,9 +6,11 @@ services:
     restart: always
     privileged: true
     environment:
-      MYSQL_ROOT_PASSWORD: 123456  #主库root用户的密码
+      MYSQL_ROOT_PASSWORD: root  #主库root用户的密码
       TZ: Asia/Shanghai
       MYSQL_DATABASE: blogx
+    ports:
+      - 3306:3306
     command:
       --default-authentication-plugin=mysql_native_password
       --character-set-server=utf8mb4
@@ -21,7 +23,6 @@ services:
       - ./master/mysql-files:/var/lib/mysql-files
       - ./master/data:/var/lib/mysql
       - ./master/log:/var/log/
-      - ./master/blogx.sql:/docker-entrypoint-initdb.d/blogx.sql
     networks:
       blogx_network:
         ipv4_address: 10.2.0.2
@@ -32,6 +33,8 @@ services:
     environment:
       discovery.type: single-node
       ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+    ports:
+      - 9200:9200
     volumes:
       - ./es/data:/usr/share/elasticsearch/data
     networks:
@@ -40,41 +43,11 @@ services:
   redis:
     restart: always
     image: redis:5.0.5
+    ports:
+      - 6379:6379
     networks:
       blogx_network:
         ipv4_address: 10.2.0.6
-  blogx_server:
-    restart: always
-    image: blogx_server:v3
-    networks:
-      blogx_network:
-        ipv4_address: 10.2.0.7
-    environment:
-      TZ: Asia/Shanghai
-    depends_on:
-      - mysql-master
-      - es
-      - redis
-    volumes:
-      - ./blogx_server/settings.yaml:/app/settings.yaml
-      - ./blogx_server/uploads:/app/uploads
-      - ./blogx_server/logs:/app/logs
-      - ./blogx_web/dist:/app/web
-    command: "/app/main"
-  blogx_web:
-    image: nginx:latest
-    restart: always
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx/logs:/var/log/nginx/
-      - ./blogx_web/dist:/usr/share/nginx/fai_web
-      - ./nginx/cert/:/usr/share/nginx/cert
-    networks:
-      blogx_network:
-        ipv4_address: 10.2.0.8
-    ports:
-      - "80:80"
-      - "443:443"
 networks:  #定义容器连接网络
   blogx_network:
     driver: bridge

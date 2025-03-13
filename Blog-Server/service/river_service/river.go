@@ -9,6 +9,7 @@ import (
 	"github.com/pingcap/errors"
 	"github.com/siddontang/go-log/log"
 	"github.com/siddontang/go-mysql/canal"
+	"github.com/sirupsen/logrus"
 	"regexp"
 	"strings"
 	"sync"
@@ -51,6 +52,7 @@ func NewRiver() (*River, error) {
 	}
 
 	if err = r.newCanal(); err != nil {
+		logrus.Errorf("canal 加载失败 %s", err)
 		return nil, errors.Trace(err)
 	}
 
@@ -86,8 +88,8 @@ func (r *River) newCanal() error {
 	cfg.Password = db.Password
 	cfg.Charset = "utf8mb4"
 	cfg.Flavor = global.Config.River.Flavor
-
 	cfg.ServerID = global.Config.River.ServerID
+	cfg.Dump.ExecutionPath = ""
 
 	for _, s := range global.Config.River.Sources {
 		for _, t := range s.Tables {

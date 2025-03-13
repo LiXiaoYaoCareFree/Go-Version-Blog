@@ -36,5 +36,5 @@ func getImage() {
 		return
 	}
 	byteData, _ := io.ReadAll(response.Body)
-	os.WriteFile("xx.jpg", byteData, 0666)
+	os.WriteFile("", byteData, 0666)
 }
