@@ -13,7 +13,7 @@ netstat -tulnp | grep 9800
 kill -9 <PID>
 
 启动es
-cd /opt/BlogX/Blog-Server/Blog-Server/init/deploy/
+cd /opt/blogx/Blog-Server/init/deploy/
 chmod 777 /opt/es/data
 docker compose up -d
 

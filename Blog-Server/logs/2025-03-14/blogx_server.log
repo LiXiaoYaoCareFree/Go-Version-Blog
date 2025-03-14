@@ -1,0 +1,38 @@
+[2025-03-14 09:14:46] [31m[fatal][0m init_db.go:25 Blog-Server/core.InitDB 数据库连接失败 Error 1049 (42000): Unknown database 'blogx'
+[2025-03-14 09:20:07] [31m[fatal][0m init_db.go:25 Blog-Server/core.InitDB 数据库连接失败 Error 1049 (42000): Unknown database 'blogx'
+[2025-03-14 09:21:57] [31m[fatal][0m init_db.go:25 Blog-Server/core.InitDB 数据库连接失败 Error 1049 (42000): Unknown database 'blogx'
+[2025-03-14 09:24:51] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-14 09:24:56] [31m[fatal][0m init_redis.go:19 Blog-Server/core.InitRedis redis连接失败 dial tcp 192.168.179.135:6379: i/o timeout
+[2025-03-14 10:08:51] [31m[fatal][0m init_db.go:25 Blog-Server/core.InitDB 数据库连接失败 dial tcp 192.168.179.135:3306: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+[2025-03-14 10:12:12] [31m[fatal][0m init_db.go:25 Blog-Server/core.InitDB 数据库连接失败 dial tcp 192.168.179.135:3306: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+[2025-03-14 10:49:19] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-14 10:49:19] [31m[fatal][0m init_db.go:45 Blog-Server/core.InitDB 读写配置错误 Error 1049 (42000): Unknown database 'blogx'
+[2025-03-14 13:22:02] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-14 13:22:02] [31m[fatal][0m init_redis.go:19 Blog-Server/core.InitRedis redis连接失败 dial tcp 127.0.0.1:6379: connectex: No connection could be made because the target machine actively refused it.
+[2025-03-14 13:23:31] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-14 13:23:31] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-14 13:23:40] [31m[panic][0m init_es.go:22 Blog-Server/core.EsConnect es连接失败 Head "http://192.168.179.135:9200": context deadline exceeded
+[2025-03-14 13:37:43] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-14 13:37:43] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-14 13:37:43] [36m[info][0m init_es.go:25 Blog-Server/core.EsConnect es连接成功
+[2025-03-14 13:37:44] [36m[info][0m index.go:25 Blog-Server/service/es_service.CreateIndex article_index 索引创建成功
+[2025-03-14 13:37:44] [36m[info][0m index.go:25 Blog-Server/service/es_service.CreateIndex text_index 索引创建成功
+[2025-03-14 13:37:58] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-14 13:37:58] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-14 13:37:58] [36m[info][0m init_es.go:25 Blog-Server/core.EsConnect es连接成功
+[2025-03-14 13:37:58] [36m[info][0m flag_db.go:40 Blog-Server/flags.FlagDB 数据库迁移成功！
+[2025-03-14 13:38:34] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-14 13:38:34] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-14 13:38:34] [36m[info][0m init_es.go:25 Blog-Server/core.EsConnect es连接成功
+[2025-03-14 13:38:58] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-14 13:38:58] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-14 13:38:58] [36m[info][0m init_es.go:25 Blog-Server/core.EsConnect es连接成功
+[2025-03-14 13:39:09] [36m[info][0m enter.go:72 Blog-Server/flags/flag_user.FlagUser.Create 创建用户成功
+[2025-03-14 13:39:19] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-14 13:39:19] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-14 13:39:19] [36m[info][0m init_es.go:25 Blog-Server/core.EsConnect es连接成功
+[2025-03-14 13:39:33] [36m[info][0m enter.go:72 Blog-Server/flags/flag_user.FlagUser.Create 创建用户成功
+[2025-03-14 15:50:09] [31m[fatal][0m init_db.go:25 Blog-Server/core.InitDB 数据库连接失败 dial tcp 192.168.179.135:3306: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+[2025-03-14 15:53:48] [36m[info][0m init_db.go:31 Blog-Server/core.InitDB 数据库连接成功!
+[2025-03-14 15:53:48] [36m[info][0m init_redis.go:21 Blog-Server/core.InitRedis redis连接成功
+[2025-03-14 15:53:49] [36m[info][0m init_es.go:25 Blog-Server/core.EsConnect es连接成功

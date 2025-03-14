@@ -6,7 +6,7 @@ services:
     restart: always
     privileged: true
     environment:
-      MYSQL_ROOT_PASSWORD: 123456  #主库root用户的密码
+      MYSQL_ROOT_PASSWORD: root  #主库root用户的密码
       TZ: Asia/Shanghai
       MYSQL_DATABASE: blogx
     command:
@@ -25,6 +25,28 @@ services:
     networks:
       blogx_network:
         ipv4_address: 10.2.0.2
+  mysql-slave:
+    image: "mysql:5.7"
+    container_name: mysql-slave
+    restart: always
+    privileged: true
+    environment:
+      MYSQL_ROOT_PASSWORD: root  #从库root用户的密码
+    command:
+      --default-authentication-plugin=mysql_native_password
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_general_ci
+      --explicit_defaults_for_timestamp=true
+      --lower_case_table_names=1
+      --max_allowed_packet=128M;
+    volumes:  #宿主机配置目录或文件挂载到容器
+      - ./slave/my.cnf:/etc/mysql/my.cnf
+      - ./slave/mysql-files:/var/lib/mysql-files
+      - ./slave/data:/var/lib/mysql
+      - ./slave/log:/var/log/
+    networks:
+      blogx_network:
+        ipv4_address: 10.2.0.3
   es:
     image: "elasticsearch:7.12.0"
     restart: always
@@ -45,12 +67,10 @@ services:
         ipv4_address: 10.2.0.6
   blogx_server:
     restart: always
-    image: blogx_server:v3
+    build: ../../
     networks:
       blogx_network:
         ipv4_address: 10.2.0.7
-    environment:
-      TZ: Asia/Shanghai
     depends_on:
       - mysql-master
       - es
@@ -59,7 +79,6 @@ services:
       - ./blogx_server/settings.yaml:/app/settings.yaml
       - ./blogx_server/uploads:/app/uploads
       - ./blogx_server/logs:/app/logs
-      - ./blogx_web/dist:/app/web
     command: "/app/main"
   blogx_web:
     image: nginx:latest

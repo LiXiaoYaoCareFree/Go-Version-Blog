@@ -25,7 +25,7 @@ es:
   is_https: false
   enable: true
 river:
-  enable: false
+  enable: true
   server_id: 1001
   flavor: mysql
   data_dir: ./var
@@ -66,12 +66,12 @@ site:
     keywords: ""
     description: ""
   about:
-    siteDate: "2024-09-18"
-    qq: https://www.fengfengzhidao.com/uploads/file/%E6%9E%AB%E6%9E%AB/qq_20231015141644.png
-    wechat: https://image.fengfengzhidao.com/rj_0731/10ca538e2acd66bc81e5f777f256372.jpg
-    gitee: https://gitee.com/fengfengzhidao
-    bilibili: https://space.bilibili.com/359151217
-    github: https://github.com/fengfengzhidao/
+    siteDate: "2025-03-13"
+    qq:
+    wechat:
+    gitee:
+    bilibili: https://space.bilibili.com/1670692465
+    github: https://github.com/LiXiaoYaoCareFree
   login:
     qqLogin: false
     usernamePwdLogin: true
@@ -97,28 +97,28 @@ site:
 email:
   domain: smtp.qq.com
   port: 587
-  sendEmail: 2974771769@qq.com
-  authCode: ""
-  sendNickname: 枫枫知道
+  sendEmail: 2210127151@qq.com
+  authCode: zhflwiskxbyueafh
+  sendNickname: LiXiaoYaoCareFree
   ssl: true
   tls: false
 qq:
-  appID: "747573454"
+  appID: ""
   appKey: ""
-  redirect: http://xxxxx
+  redirect: ""
 qiNiu:
   enable: true
-  accessKey: UMM-dgbL9Wf-FdRIf-OvkIakNfVCoAXUELkVUXpo
-  secretKey: ""
-  bucket: fengfengzhidao
-  uri: https://image.fengfengzhidao.com
-  region: z2
+  accessKey: iAGmqdbwnY6ZZZPA_q79oHytI3kRv382F5KqukWB
+  secretKey: HyNEbrunPiCovBR92wahb6pXAutk3zGifKNEi6-X
+  bucket: codeforge
+  uri: http://ssdeemm5d.hb-bkt.clouddn.com
+  region: z1
   prefix: blogx
   size: 3
   expiry: 60
 ai:
   enable: false
-  secretKey: njdfnhj6344t45347gsdhgsdh
+  secretKey: sk-zfauDNTFOZlmyOIXAZgvhpZj82GPom6JKbhTlzNZRIMlWB1S
   nickname: 小枫
   avatar: /xxx/xxx
   abstract: Hello，我是你的AI小管家,你可以叫我逍遥云,我可以根据你的描述在全站文章中去找到你所喜欢的文章,赶紧来试试吧！
