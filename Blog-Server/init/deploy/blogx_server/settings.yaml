@@ -16,7 +16,7 @@ db:
     source: mysql
 redis:
   addr: 10.2.0.6:6379
-  password: "1234"
+  password: ""
   db: 2
 es:
   addr: 10.2.0.5:9200

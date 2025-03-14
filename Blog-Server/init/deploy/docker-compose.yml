@@ -67,7 +67,7 @@ services:
         ipv4_address: 10.2.0.6
   blogx_server:
     restart: always
-    build: ../../
+    image: blogx_server:v2
     networks:
       blogx_network:
         ipv4_address: 10.2.0.7
