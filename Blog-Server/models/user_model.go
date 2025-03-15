@@ -50,4 +50,5 @@ type UserConfModel struct {
 	OpenFans           bool       `json:"openFans"`           // 公开我的粉丝
 	OpenFollow         bool       `json:"openFollow"`         // 公开我的关注
 	HomeStyleID        uint       `json:"homeStyleID"`        //主页样式
+	LookCount          int        `json:"lookCount"`          // 主页的访问次数
 }
