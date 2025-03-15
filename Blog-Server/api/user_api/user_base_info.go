@@ -5,24 +5,28 @@ import (
 	"Blog-Server/common/res"
 	"Blog-Server/global"
 	"Blog-Server/models"
+	"Blog-Server/models/enum/relationship_enum"
+	"Blog-Server/service/focus_service"
 	"Blog-Server/service/redis_service/redis_user"
+	"Blog-Server/utils/jwts"
 	"github.com/gin-gonic/gin"
 )
 
 type UserBaseInfoResponse struct {
-	UserID       uint   `json:"userID"`
-	CodeAge      int    `json:"codeAge"`
-	Avatar       string `json:"avatar"`
-	Nickname     string `json:"nickname"`
-	LookCount    int    `json:"lookCount"`
-	ArticleCount int    `json:"articleCount"`
-	FansCount    int    `json:"fansCount"`
-	FollowCount  int    `json:"followCount"`
-	Place        string `json:"place"`       // ip归属地
-	OpenCollect  bool   `json:"openCollect"` // 公开我的收藏
-	OpenFollow   bool   `json:"openFollow"`  // 公开我的关注
-	OpenFans     bool   `json:"openFans"`    // 公开我的粉丝
-	HomeStyleID  uint   `json:"homeStyleID"` // 主页样式的id
+	UserID       uint                       `json:"userID"`
+	CodeAge      int                        `json:"codeAge"`
+	Avatar       string                     `json:"avatar"`
+	Nickname     string                     `json:"nickname"`
+	LookCount    int                        `json:"lookCount"`
+	ArticleCount int                        `json:"articleCount"`
+	FansCount    int                        `json:"fansCount"`
+	FollowCount  int                        `json:"followCount"`
+	Place        string                     `json:"place"`       // ip归属地
+	OpenCollect  bool                       `json:"openCollect"` // 公开我的收藏
+	OpenFollow   bool                       `json:"openFollow"`  // 公开我的关注
+	OpenFans     bool                       `json:"openFans"`    // 公开我的粉丝
+	HomeStyleID  uint                       `json:"homeStyleID"` // 主页样式的id
+	Relation     relationship_enum.Relation `json:"relation"`    // 与登录人的关系
 }
 
 func (UserApi) UserBaseInfoView(c *gin.Context) {
@@ -55,6 +59,12 @@ func (UserApi) UserBaseInfoView(c *gin.Context) {
 		OpenFans:     user.UserConfModel.OpenFans,
 		HomeStyleID:  user.UserConfModel.HomeStyleID,
 	}
+
+	claims, err := jwts.ParseTokenByGin(c)
+	if err == nil && claims != nil {
+		data.Relation = focus_service.CalcUserRelationship(claims.UserID, cr.ID)
+	}
+
 	var focusList []models.UserFocusModel
 	global.DB.Find(&focusList, "user_id = ? or focus_user_id = ?", cr.ID, cr.ID)
 	for _, model := range focusList {
