@@ -22,6 +22,8 @@ services:
       - ./master/data:/var/lib/mysql
       - ./master/log:/var/log/
       - ./master/blogx.sql:/docker-entrypoint-initdb.d/blogx.sql
+    ports:
+      - 3306:3306
     networks:
       blogx_network:
         ipv4_address: 10.2.0.2
@@ -44,6 +46,8 @@ services:
       - ./slave/mysql-files:/var/lib/mysql-files
       - ./slave/data:/var/lib/mysql
       - ./slave/log:/var/log/
+    ports:
+      - 3307:3306
     networks:
       blogx_network:
         ipv4_address: 10.2.0.3
@@ -56,12 +60,16 @@ services:
       ES_JAVA_OPTS: "-Xms512m -Xmx512m"
     volumes:
       - ./es/data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
     networks:
       blogx_network:
         ipv4_address: 10.2.0.5
   redis:
     restart: always
     image: redis:5.0.5
+    ports:
+      - 6379:6379
     networks:
       blogx_network:
         ipv4_address: 10.2.0.6

@@ -1,0 +1,3 @@
+先关闭river
+执行es
+再打开river
