@@ -7,6 +7,7 @@ import (
 	"Blog-Server/api/captcha_api"
 	"Blog-Server/api/chat_api"
 	"Blog-Server/api/comment_api"
+	"Blog-Server/api/data_api"
 	"Blog-Server/api/focus_api"
 	"Blog-Server/api/global_notification_api"
 	"Blog-Server/api/image_api"
@@ -32,6 +33,7 @@ type Api struct {
 	ChatApi               chat_api.ChatApi
 	SearchApi             search_api.SearchApi
 	AiApi                 ai_api.AiApi
+	DataApi               data_api.DataApi
 }
 
 var App = Api{}
