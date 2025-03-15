@@ -6,19 +6,22 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
 	"net/url"
+	"strings"
 	"time"
 )
 
 type CacheOption struct {
-	Prefix CacheMiddlewarePrefix
-	Time   time.Duration
-	Params []string
+	Prefix  CacheMiddlewarePrefix
+	Time    time.Duration
+	Params  []string
+	NoCache func(c *gin.Context) bool
 }
 
 type CacheMiddlewarePrefix string
 
 const (
 	CacheBannerPrefix CacheMiddlewarePrefix = "cache_banner_"
+	CacheDataPrefix   CacheMiddlewarePrefix = "cache_data_"
 )
 
 func NewBannerCacheOption() CacheOption {
@@ -26,6 +29,21 @@ func NewBannerCacheOption() CacheOption {
 		Prefix: CacheBannerPrefix,
 		Time:   time.Hour,
 		Params: []string{"type"},
+		NoCache: func(c *gin.Context) bool {
+			var referer = c.GetHeader("referer")
+			if strings.Contains(referer, "admin") {
+				// 后台来的，不走缓存
+				return true
+			}
+			return false
+		},
+	}
+}
+
+func NewDataCacheOption() CacheOption {
+	return CacheOption{
+		Prefix: CacheDataPrefix,
+		Time:   time.Minute,
 	}
 }
 
@@ -47,8 +65,9 @@ func CacheMiddleware(option CacheOption) gin.HandlerFunc {
 		key := fmt.Sprintf("%s%s", option.Prefix, values.Encode())
 		// 请求部分
 		val, err := global.Redis.Get(key).Result()
-		fmt.Println(key, val, err)
-		if err == nil {
+		fmt.Println(key, err)
+		// (找到缓存 && 没有配置noCache) || (找到缓存 && noCache = false)
+		if (err == nil && option.NoCache == nil) || (err == nil && option.NoCache(c) == false) {
 			c.Abort()
 			fmt.Println("走缓存了")
 			c.Header("Content-Type", "application/json; charset=utf-8")
