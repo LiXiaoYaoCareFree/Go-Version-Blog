@@ -92,7 +92,7 @@ func (ArticleApi) ArticleCollectView(c *gin.Context) {
 	res.OkWithMsg("取消收藏成功", c)
 	//TODO:收藏数同步缓存
 	redis_article.SetCacheCollect(cr.ArticleID, false)
-	global.DB.Model(&collectModel).Update("article_count", gorm.Expr("article_count - 1"))
+	//global.DB.Model(&collectModel).Update("article_count", gorm.Expr("article_count - 1"))
 	return
 }
 
