@@ -7,6 +7,8 @@ import (
 	"Blog-Server/middleware"
 	"Blog-Server/models"
 	"Blog-Server/models/enum"
+	"Blog-Server/models/enum/relationship_enum"
+	"Blog-Server/service/focus_service"
 	"Blog-Server/service/redis_service/redis_comment"
 	"Blog-Server/utils/jwts"
 	"github.com/gin-gonic/gin"
@@ -21,16 +23,18 @@ type CommentListRequest struct {
 }
 
 type CommentListResponse struct {
-	ID           uint      `json:"id"`
-	CreatedAt    time.Time `json:"createdAt"`
-	Content      string    `json:"content"`
-	UserID       uint      `json:"userID"`
-	UserNickname string    `json:"userNickname"`
-	UserAvatar   string    `json:"userAvatar"`
-	ArticleID    uint      `json:"articleID"`
-	ArticleTitle string    `json:"articleTitle"`
-	ArticleCover string    `json:"articleCover"`
-	DiggCount    int       `json:"diggCount"`
+	ID           uint                       `json:"id"`
+	CreatedAt    time.Time                  `json:"createdAt"`
+	Content      string                     `json:"content"`
+	UserID       uint                       `json:"userID"`
+	UserNickname string                     `json:"userNickname"`
+	UserAvatar   string                     `json:"userAvatar"`
+	ArticleID    uint                       `json:"articleID"`
+	ArticleTitle string                     `json:"articleTitle"`
+	ArticleCover string                     `json:"articleCover"`
+	DiggCount    int                        `json:"diggCount"`
+	Relation     relationship_enum.Relation `json:"relation,omitempty"`
+	IsMe         bool                       `json:"isMe"`
 }
 
 func (CommentApi) CommentListView(c *gin.Context) {
@@ -62,6 +66,14 @@ func (CommentApi) CommentListView(c *gin.Context) {
 		Where:    query,
 	})
 
+	var RelationMao = map[uint]relationship_enum.Relation{}
+	if cr.Type == 1 {
+		var userIDList []uint
+		for _, model := range _list {
+			userIDList = append(userIDList, model.UserID)
+		}
+		RelationMao = focus_service.CalcUserPatchRelationship(claims.UserID, userIDList)
+	}
 	var list = make([]CommentListResponse, 0)
 	for _, model := range _list {
 		list = append(list, CommentListResponse{
@@ -75,6 +87,8 @@ func (CommentApi) CommentListView(c *gin.Context) {
 			ArticleTitle: model.ArticleModel.Title,
 			ArticleCover: model.ArticleModel.Cover,
 			DiggCount:    model.DiggCount + redis_comment.GetCacheDigg(model.ID),
+			Relation:     RelationMao[model.UserID],
+			IsMe:         model.UserID == claims.UserID,
 		})
 	}
 
