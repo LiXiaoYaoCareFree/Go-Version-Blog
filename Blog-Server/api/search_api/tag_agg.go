@@ -11,6 +11,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/olivere/elastic/v7"
 	"github.com/sirupsen/logrus"
+	"sort"
 )
 
 type TagAggResponse struct {
@@ -22,6 +23,29 @@ func (SearchApi) TagAggView(c *gin.Context) {
 	var cr = middleware.GetBind[common.PageInfo](c)
 	var list = make([]TagAggResponse, 0)
 	if global.ESClient == nil {
+		var articleList []models.ArticleModel
+		global.DB.Find(&articleList, "tag_list <> ''")
+		var tagMap = map[string]int{}
+		for _, model := range articleList {
+			for _, tag := range model.TagList {
+				count, ok := tagMap[tag]
+				if !ok {
+					tagMap[tag] = 1
+					continue
+				}
+				tagMap[tag] = count + 1
+			}
+		}
+		for tag, count := range tagMap {
+			list = append(list, TagAggResponse{
+				Tag:          tag,
+				ArticleCount: count,
+			})
+		}
+		sort.Slice(list, func(i, j int) bool {
+			return list[i].ArticleCount > list[j].ArticleCount
+		})
+		res.OkWithList(list, len(list), c)
 		return
 	}
 
