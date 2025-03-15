@@ -4,6 +4,7 @@ package router
 import (
 	"Blog-Server/api"
 	"Blog-Server/api/article_api"
+	"Blog-Server/common"
 	"Blog-Server/middleware"
 	"Blog-Server/models"
 	"github.com/gin-gonic/gin"
@@ -40,4 +41,5 @@ func ArticleRouter(r *gin.RouterGroup) {
 
 	r.GET("category/options", middleware.AuthMiddleware, app.CategoryOptionsView)
 	r.GET("article/tag/options", middleware.AuthMiddleware, app.ArticleTagOptionsView)
+	r.GET("article/auth_recommend", middleware.BindQueryMiddleware[common.PageInfo], app.AuthRecommendView)
 }
