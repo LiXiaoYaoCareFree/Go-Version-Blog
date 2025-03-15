@@ -9,7 +9,6 @@ import (
 	"Blog-Server/models/enum/relationship_enum"
 	"Blog-Server/service/focus_service"
 	"Blog-Server/utils/jwts"
-	"fmt"
 	"github.com/gin-gonic/gin"
 )
 
@@ -40,8 +39,6 @@ func (ArticleApi) AuthRecommendView(c *gin.Context) {
 				userIDList = append(userIDList, u)
 			}
 		}
-		fmt.Println(m)
-		fmt.Println(userIDList)
 	}
 	var userList []models.UserModel
 	global.DB.Find(&userList, "id in ?", userIDList)
