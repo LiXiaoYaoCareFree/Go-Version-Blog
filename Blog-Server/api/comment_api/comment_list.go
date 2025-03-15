@@ -64,7 +64,6 @@ func (CommentApi) CommentListView(c *gin.Context) {
 		Likes:    []string{"content"},
 		Preloads: []string{"UserModel", "ArticleModel"},
 		Where:    query,
-		Debug:    true,
 	})
 
 	var RelationMao = map[uint]relationship_enum.Relation{}
