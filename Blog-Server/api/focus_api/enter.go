@@ -6,6 +6,8 @@ import (
 	"Blog-Server/global"
 	"Blog-Server/middleware"
 	"Blog-Server/models"
+	"Blog-Server/models/enum/relationship_enum"
+	"Blog-Server/service/focus_service"
 	"Blog-Server/utils/jwts"
 	"fmt"
 	"github.com/gin-gonic/gin"
@@ -61,12 +63,13 @@ type FocusUserListRequest struct {
 	FocusUserID uint `form:"focusUserID"`
 	UserID      uint `form:"userID"` // 查用户的关注
 }
-type FocusUserListResponse struct {
-	FocusUserID       uint      `json:"focusUserID"`
-	FocusUserNickname string    `json:"focusUserNickname"`
-	FocusUserAvatar   string    `json:"focusUserAvatar"`
-	FocusUserAbstract string    `json:"focusUserAbstract"`
-	CreatedAt         time.Time `json:"createdAt"`
+type UserListResponse struct {
+	UserID       uint                       `json:"userID"`
+	UserNickname string                     `json:"userNickname"`
+	UserAvatar   string                     `json:"userAvatar"`
+	UserAbstract string                     `json:"userAbstract"`
+	Relationship relationship_enum.Relation `json:"relationship"`
+	CreatedAt    time.Time                  `json:"createdAt"`
 }
 
 // FocusUserListView 我的关注和用户的关注
@@ -87,6 +90,7 @@ func (FocusApi) FocusUserListView(c *gin.Context) {
 			res.FailWithMsg("此用户未公开我的关注", c)
 			return
 		}
+
 		// 如果你没登录。我就不允许你查第二页
 		if err != nil || claims == nil {
 			if cr.Limit > 10 || cr.Page > 1 {
@@ -94,6 +98,7 @@ func (FocusApi) FocusUserListView(c *gin.Context) {
 				return
 			}
 		}
+
 	} else {
 		if err != nil || claims == nil {
 			res.FailWithMsg("请登录", c)
@@ -123,26 +128,29 @@ func (FocusApi) FocusUserListView(c *gin.Context) {
 		Preloads: []string{"FocusUserModel"},
 	})
 
-	var list = make([]FocusUserListResponse, 0)
+	var m = map[uint]relationship_enum.Relation{}
+	if err == nil && claims != nil {
+		var userIDList []uint
+		for _, i2 := range _list {
+			userIDList = append(userIDList, i2.FocusUserID)
+		}
+		m = focus_service.CalcUserPatchRelationship(claims.UserID, userIDList)
+
+	}
+
+	var list = make([]UserListResponse, 0)
 	for _, model := range _list {
-		list = append(list, FocusUserListResponse{
-			FocusUserID:       model.FocusUserID,
-			FocusUserNickname: model.FocusUserModel.Nickname,
-			FocusUserAvatar:   model.FocusUserModel.Avatar,
-			FocusUserAbstract: model.FocusUserModel.Abstract,
-			CreatedAt:         model.CreatedAt,
+		list = append(list, UserListResponse{
+			UserID:       model.FocusUserID,
+			UserNickname: model.FocusUserModel.Nickname,
+			UserAvatar:   model.FocusUserModel.Avatar,
+			UserAbstract: model.FocusUserModel.Abstract,
+			Relationship: m[model.FocusUserID],
+			CreatedAt:    model.CreatedAt,
 		})
 	}
 
 	res.OkWithList(list, count, c)
-}
-
-type FansUserListResponse struct {
-	FansUserID       uint      `json:"fansUserID"`
-	FansUserNickname string    `json:"fansUserNickname"`
-	FansUserAvatar   string    `json:"fansUserAvatar"`
-	FansUserAbstract string    `json:"fansUserAbstract"`
-	CreatedAt        time.Time `json:"createdAt"`
 }
 
 // FansUserListView 我的粉丝和用户的粉丝
@@ -169,7 +177,6 @@ func (FocusApi) FansUserListView(c *gin.Context) {
 			}
 		}
 	} else {
-		claims, err := jwts.ParseTokenByGin(c)
 		if err != nil || claims == nil {
 			res.FailWithMsg("请登录", c)
 			return
@@ -197,15 +204,24 @@ func (FocusApi) FansUserListView(c *gin.Context) {
 		Where:    query,
 		Preloads: []string{"UserModel"},
 	})
+	var m = map[uint]relationship_enum.Relation{}
+	if err == nil && claims != nil {
+		var userIDList []uint
+		for _, i2 := range _list {
+			userIDList = append(userIDList, i2.UserID)
+		}
+		m = focus_service.CalcUserPatchRelationship(claims.UserID, userIDList)
+	}
 
-	var list = make([]FansUserListResponse, 0)
+	var list = make([]UserListResponse, 0)
 	for _, model := range _list {
-		list = append(list, FansUserListResponse{
-			FansUserID:       model.UserID,
-			FansUserNickname: model.UserModel.Nickname,
-			FansUserAvatar:   model.UserModel.Avatar,
-			FansUserAbstract: model.UserModel.Abstract,
-			CreatedAt:        model.CreatedAt,
+		list = append(list, UserListResponse{
+			UserID:       model.UserID,
+			UserNickname: model.UserModel.Nickname,
+			UserAvatar:   model.UserModel.Avatar,
+			UserAbstract: model.UserModel.Abstract,
+			CreatedAt:    model.CreatedAt,
+			Relationship: m[model.UserID],
 		})
 	}
 
