@@ -14,5 +14,6 @@ RUN go build -o main
 FROM alpine
 WORKDIR /app
 COPY --from=builder /build/main /app
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 RUN apk add tzdata
 CMD ["./main"]
