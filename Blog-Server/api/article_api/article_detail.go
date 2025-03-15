@@ -69,6 +69,7 @@ func (ArticleApi) ArticleDetailView(c *gin.Context) {
 			data.IsDigg = true
 		}
 
+		// 用户是否收藏了文章 只要在其中任何一个收藏夹内，都判断用户收藏了文章
 		var userCollectModel models.UserArticleCollectModel
 		err = global.DB.Take(&userCollectModel, "user_id = ? and article_id = ?", claims.UserID, article.ID).Error
 		if err == nil {
