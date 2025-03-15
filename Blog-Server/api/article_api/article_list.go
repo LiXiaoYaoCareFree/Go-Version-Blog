@@ -36,6 +36,7 @@ func (ArticleApi) ArticleListView(c *gin.Context) {
 	cr := middleware.GetBind[ArticleListRequest](c)
 
 	var topArticleIDList []uint // [1 2 3] => (1,2,3)
+
 	var orderColumnMap = map[string]bool{
 		"look_count desc":    true,
 		"digg_count desc":    true,
@@ -102,20 +103,25 @@ func (ArticleApi) ArticleListView(c *gin.Context) {
 			return
 		}
 	}
+
 	var userTopMap = map[uint]bool{}
 	var adminTopMap = map[uint]bool{}
+	var userTopQuery = global.DB.Where("")
 	if cr.UserID != 0 {
-		var userTopArticleList []models.UserTopArticleModel
-		global.DB.Preload("UserModel").Order("created_at desc").Find(&userTopArticleList, "user_id = ?", cr.UserID)
-
-		for _, i2 := range userTopArticleList {
-			topArticleIDList = append(topArticleIDList, i2.ArticleID)
-			if i2.UserModel.Role == enum.AdminRole {
-				adminTopMap[i2.ArticleID] = true
-			}
-			userTopMap[i2.ArticleID] = true
-		}
+		userTopQuery.Where("user_id = ?", cr.UserID)
 	}
+	var userTopArticleList []models.UserTopArticleModel
+	global.DB.Preload("UserModel").Order("created_at desc").Where(userTopQuery).Find(&userTopArticleList)
+
+	for _, i2 := range userTopArticleList {
+		topArticleIDList = append(topArticleIDList, i2.ArticleID)
+		if i2.UserModel.Role == enum.AdminRole {
+			adminTopMap[i2.ArticleID] = true
+
+		}
+		userTopMap[i2.ArticleID] = true
+	}
+
 	var options = common.Options{
 		Likes:        []string{"title"},
 		PageInfo:     cr.PageInfo,
@@ -125,7 +131,6 @@ func (ArticleApi) ArticleListView(c *gin.Context) {
 	if len(topArticleIDList) > 0 {
 		options.DefaultOrder = fmt.Sprintf("%s, created_at desc", sql.ConvertSliceOrderSql(topArticleIDList))
 	}
-
 	_list, count, _ := common.ListQuery(models.ArticleModel{
 		UserID:     cr.UserID,
 		CategoryID: cr.CategoryID,
@@ -137,6 +142,7 @@ func (ArticleApi) ArticleListView(c *gin.Context) {
 	diggMap := redis_article.GetAllCacheDigg()
 	lookMap := redis_article.GetAllCacheLook()
 	commentMap := redis_article.GetAllCacheComment()
+
 	for _, model := range _list {
 		model.Content = ""
 		model.DiggCount = model.DiggCount + diggMap[model.ID]
